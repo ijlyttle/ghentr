@@ -11,7 +11,7 @@ Description: The devtools package provides a couple of useful functions for
  GitHub Enterprise. You can use this package to create analagous functions in
  a custom package to work with your instance of GitHub Enterprise.
 Depends: R (>= 3.4.1)
-License: MIT + file LICENSE
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ijlyttle/ghentr
