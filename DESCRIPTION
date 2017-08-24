@@ -16,4 +16,5 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ijlyttle/ghentr
 BugReports: https://github.com/ijlyttle/ghentr/issues
-Roxygen: list(use_markdown = TRUE)
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
