@@ -1,0 +1,16 @@
+Package: ghentr
+Title: Templating Functions to Use with GitHub Enterprise
+Version: 0.0.0.9000
+Authors@R: c(
+  person(given = "Ian", family = "Lyttle", email = "ian.lyttle@schneider-electric.com", role = c("aut", "cre"))
+  )
+Description: The devtools package provides a couple of useful functions for 
+ for working with GitHub: install_github(), to install packages from GitHub, 
+ and use_github(), to connect a local package repository with GitHub. However,
+ these functions are not as convenient to use with a particular instance of 
+ GitHub Enterprise. You can use this package to create analagous functions in
+ a custom package to work with your instance of GitHub Enterprise.
+Depends: R (>= 3.4.1)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
