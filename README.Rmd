@@ -12,6 +12,10 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![Travis-CI Build Status](https://travis-ci.org/ijlyttle/ghentr.svg?branch=master)](https://travis-ci.org/ijlyttle/ghentr)
+[![Coverage Status](https://img.shields.io/codecov/c/github/ijlyttle/ghentr/master.svg)](https://codecov.io/github/ijlyttle/ghentr?branch=master)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/ghentr)](https://cran.r-project.org/package=ghentr)
+
 # ghentr
 
 The goal of ghentr is to make it easier for you to build custom functions to access your instance of GitHub Enterprise.
