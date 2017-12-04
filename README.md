@@ -7,6 +7,22 @@ ghentr
 
 The goal of ghentr is to make it easier for you to build custom functions to access your instance of GitHub Enterprise.
 
+You are likely already using the functions `devtools::install_github()` and `usethis::use_github()` to interact with `github.com`. If you have an instance GitHub Enterprise (GHE), these functions have a `host` argument that lets you work with your GHE.
+
+Let's say that you work for [Acme Corporation](https://en.wikipedia.org/wiki/Acme_Corporation), and that Acme has its own instance of GitHub Enterprise. At present, you could install package using the `host` argument with `devtools::install_github`.
+
+``` r
+devtools::install_github("user/repo", host = "github.acme-corp.com/api/v3")
+```
+
+In the fullness of time it may become tiresome to add the host argument. Instead, it might be handy to wrap this in a function, then put that function into a package that you can make available to your colleagues. This is what **ghentr** helps you to do.
+
+Let's say you create a package called **acmetools**. Using tempating functions in this package, you can add a function to your package to do the same thing:
+
+``` r
+acmetools::install_github_acme("user/repo")
+```
+
 Installation
 ------------
 
