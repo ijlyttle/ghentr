@@ -27,7 +27,7 @@ Let's say that you work for [Acme Corporation](https://en.wikipedia.org/wiki/Acm
 devtools::install_github("user/repo", host = "github.acme-corp.com/api/v3")
 ```
 
-In the fullness of time it may become tiresome to add the host argument. Instead, it might be handy to wrap this in a function, then put that function into a package that you can make available to your colleagues. This is what **ghentr** helps you to do. 
+In the fullness of time it may become tiresome to add the host argument each time you want to install a package from GHE. Instead, it might be handy to wrap this in a function, then put that function into a package that you can use and make available to your colleagues. This is what **ghentr** helps you to do. 
 
 Let's say you create a package called **acmetools**. Using tempating functions in this package, you can add a function to your package to do the same thing:
 
