@@ -28,11 +28,17 @@ What you need
 
 To make use of this, you will need a few things:
 
--   an instance of GitHub Enterprise, used to determine the `host`, i.e. `"github.acme-corp.com/api/v3"`
+-   an instance of GitHub Enterprise, used to determine the `host`, e.g. `"github.acme-corp.com/api/v3"`
 
--   a longform `name` to use in your functions' documentation, i.e. `"Acme Corporation"`
+-   a longform `name` to use in your functions' documentation, e.g. `"Acme Corporation"`
 
--   a shorter `suffix` to use in the names of your new functions, i.e. `"acme"`
+-   a shorter `suffix` to use in the names of your new functions, e.g. `"acme"`
+
+Followup steps:
+
+If you modified your `.Rprofile` file to load **devtools** automatically into your interactive sessions, you may want also to do the same for **acmetools**.
+
+As you know, `devtools::install_github()` uses a GitHub Personal Access Token, normally stored in an environment variable named `GITHUB_PAT`. The function `acmetools::install_github_acme()` will default to look for an environment variable named `GITHUB_ACME_PAT`. You and your colleagues will have to create your tokens then add this variable to your `.Renviron` file.
 
 Installation
 ------------
