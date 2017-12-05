@@ -45,11 +45,28 @@ To make use of this, you will need a few things:
 
 - a shorter `suffix` to use in the names of your new functions, e.g. `"acme"`
 
-Followup steps:
+## What happens
+
+```{r eval=FALSE}
+use_github_enterprise(
+  host = "github.acme-corp.com/api/v3",
+  suffix = "acme",
+  name = "Acme Corporation"
+)
+```
+
+## Followup steps
 
 If you modified your `.Rprofile` file to load **devtools** automatically into your interactive sessions, you may want also to do the same for **acmetools**. 
 
 As you know, `devtools::install_github()` uses a GitHub Personal Access Token, normally stored in an environment variable named `GITHUB_PAT`. The function `acmetools::install_github_acme()` will default to look for an environment variable named `GITHUB_ACME_PAT`. You and your colleagues will have to create your tokens then add this variable to your `.Renviron` file.
+
+You can make your package **acmetools** available to your colleagues using code like this:
+
+```{r}
+install.packages("devtools")
+devtools::install_github("foo/acmetools", host = "github.acme-corp.com/api/v3")
+```
 
 ## Installation
 
