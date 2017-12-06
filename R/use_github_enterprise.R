@@ -7,7 +7,52 @@
 #' @return `invisible(NULL)`, called for side effects
 #' @export
 #'
+use_github_enterprise <- function(host, suffix, name) {
+
+  data <- list(
+    package_name = usethis:::project_name(),
+    host = host,
+    suffix = suffix,
+    suffix_upper = toupper(suffix),
+    name = name
+  )
+
+  use_ghe_pat(suffix, name)
+
+  use_install_ghe(host, suffix, name)
+
+  use_use_ghe(host, suffix, name)
+
+  # TODO: feedback on what to put into README
+  usethis:::todo("Run devtools::document()")
+  usethis:::todo(
+    "Add this to your package's README, manually replacing ",
+    "the items inside {curly brackets}."
+  )
+  usethis:::code_block(
+    vapply(
+      readLines(system.file("templates/ghe.md", package = "ghentr")),
+      whisker::whisker.render,
+      "",
+      data,
+      USE.NAMES = FALSE
+    )
+  )
+
+
+  invisible(NULL)
+
+
+}
+
+#' @rdname use_github_enterprise
+#' @export
+#'
 use_install_ghe <- function(host, suffix, name) {
+
+  if (!usethis:::uses_roxygen()) {
+    stop("`use_install_ghe()` requires that you use roxygen.", call. = FALSE)
+  }
 
   data <- list(
     host = host,
@@ -26,10 +71,14 @@ use_install_ghe <- function(host, suffix, name) {
   invisible(NULL)
 }
 
-#' @rdname use_install_ghe
+#' @rdname use_github_enterprise
 #' @export
 #'
 use_ghe_pat <- function(suffix, name) {
+
+  if (!usethis:::uses_roxygen()) {
+    stop("`use_ghe_pat()` requires that you use roxygen.", call. = FALSE)
+  }
 
   data <- list(
     suffix = suffix,
@@ -48,10 +97,14 @@ use_ghe_pat <- function(suffix, name) {
   invisible(NULL)
 }
 
-#' @rdname use_install_ghe
+#' @rdname use_github_enterprise
 #' @export
 #'
 use_use_ghe <- function(host, suffix, name) {
+
+  if (!usethis:::uses_roxygen()) {
+    stop("`use_use_ghe()` requires that you use roxygen.", call. = FALSE)
+  }
 
   data <- list(
     host = host,
