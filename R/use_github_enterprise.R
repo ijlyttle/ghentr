@@ -39,10 +39,7 @@ use_github_enterprise <- function(host, suffix, name) {
     )
   )
 
-
   invisible(NULL)
-
-
 }
 
 #' @rdname use_github_enterprise
@@ -86,6 +83,8 @@ use_ghe_pat <- function(suffix, name) {
     name = name
   )
 
+  usethis::use_package("usethis")
+
   usethis::use_template(
     template = "ghe_pat.R",
     save_as = "R/utils-ghe_pat.R",
@@ -111,6 +110,8 @@ use_use_ghe <- function(host, suffix, name) {
     suffix = suffix,
     name = name
   )
+
+  usethis::use_package("devtools")
 
   usethis::use_template(
     template = "use_ghe.R",
