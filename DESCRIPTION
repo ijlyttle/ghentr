@@ -19,5 +19,7 @@ BugReports: https://github.com/ijlyttle/ghentr/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 Suggests: covr
-Imports: devtools,
-    usethis
+Imports: 
+    devtools,
+    usethis,
+    roxygen2

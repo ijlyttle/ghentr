@@ -26,5 +26,37 @@ use_use_ghe(host, suffix, name)
 \code{invisible(NULL)}, called for side effects
 }
 \description{
-Use GitHub Enterprise components in your package
+These functions are used to write function files for your package.
+}
+\details{
+The function \code{use_ghe_enterprise()} calls all the templating functions:
+
+\describe{
+\item{\code{use_install_ghe()}}{Writes a file, \code{utils-install_ghe.R} containing
+a function \code{install_github_foo()} that wraps
+\code{devtools::install_github()}, using the \code{host} argument of this function.}
+\item{\code{use_ghe_pat()}}{Writes a file, \code{utils-ghe_pat.R} containing
+a function \code{github_foo_pat()} that parallels \code{devtools::github_pat()}.
+This new function will look for an environment variable
+named \code{GITHUB_FOO_PAT}.}
+\item{\code{use_use_ghe()}}{Writes a file, \code{utils-use_ghe.R}, that
+contains a function \code{use_github_foo()} that
+wraps \code{usethis::use_github()}, using
+the \code{host} argument of this function.}
+}
+
+For each of the functions described above, the \code{foo} in the function name
+is the value of the \code{suffix} argument from this function.
+The \code{name} argument from this function is interpolated into the
+documentation of each of written functions.
+}
+\examples{
+\dontrun{
+  use_github_enterprise(
+    host = "github.acme-corp.com/api/v3",
+    suffix = "acme",
+    name = "Acme Corporation"
+  )
+}
+
 }

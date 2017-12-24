@@ -36,7 +36,7 @@ Let's say you create a package called **acmetools**. Using templating functions 
 acmetools::install_github_acme("user/repo")
 ```
 
-Furthermore, you can use the templating functions in your package to create a function to make it easier to create a package repository on your instance of GHE:
+Furthermore, you can use the templating functions in your package to create a function to make it easier to create a package repository at your instance of GHE:
 
 ```{r eval=FALSE}
 # wraps usethis::use_github()
@@ -62,10 +62,10 @@ To create your functions, you will need a few things:
 
 - a shorter `suffix` to use in the names of your new functions, e.g. `"acme"`
 
-These arguments are used with the function `use_github_enterprise()` to write some 
+These arguments are used with the function `use_github_enterprise()`:
 
 ```{r eval=FALSE}
-use_github_enterprise(
+ghentr::use_github_enterprise(
   host = "github.acme-corp.com/api/v3",
   suffix = "acme",
   name = "Acme Corporation"
@@ -80,15 +80,13 @@ This function will write three files into the `R` directory of your package proj
 
 - `utils-ghe_pat.R`, containing `github_acme_pat()`
 
-It will also add `usethis` and `devtools` to the `Imports` section of your `DESCRIPTION` file.
+It will also add `roxygen2`, `usethis`, and `devtools` to the `Imports` section of your `DESCRIPTION` file.
 
 Finally, it will copy some text to your clipboard that may be helpful for your `README` file.
 
 ## Followup steps
 
-If you modified your `.Rprofile` file to load **devtools** automatically into your interactive sessions, you may want also to do the same for **acmetools**. 
-
-As you know, `devtools::install_github()` uses a GitHub Personal Access Token, normally stored in an environment variable named `GITHUB_PAT`. The function `acmetools::install_github_acme()` will default to look for an environment variable named `GITHUB_ACME_PAT`. You and your colleagues will have to create your tokens, then add the information to your `.Renviron` files.
+As you know, `devtools::install_github()` uses a GitHub Personal Access Token, normally stored in an environment variable named `GITHUB_PAT`. The function `acmetools::install_github_acme()` will  look for an environment variable named `GITHUB_ACME_PAT`. You and your colleagues will have to create your tokens, then add the information to your `.Renviron` files.
 
 You can make your package **acmetools** available to your colleagues using code like this:
 
@@ -96,6 +94,8 @@ You can make your package **acmetools** available to your colleagues using code 
 # install.packages("devtools")
 devtools::install_github("foo/acmetools", host = "github.acme-corp.com/api/v3")
 ```
+
+If you modified your `.Rprofile` file to load **devtools** automatically into your interactive sessions, you may want also to do the same for **acmetools**. 
 
 ## Code of Conduct
 
