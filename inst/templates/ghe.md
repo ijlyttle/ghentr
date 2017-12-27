@@ -12,7 +12,7 @@ devtools::install_github("{name}/{{package_name}}", host = "{{host}}")
 For future package-installations from {{name}}'s GitHub Enterprise, 
 you can simply use `{{package_name}}::use_github_{{suffix}}("user/repo")`.
 
-If you wish that **{{name}}** be started automatically in your interactive 
+If you wish that **{{package_name}}** be started automatically in your interactive 
 sessions, you can modify your `.Rprofile` file, just like you would for
 [**devtools**](https://github.com/hadley/devtools#other-tips). 
 

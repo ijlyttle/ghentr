@@ -2,13 +2,15 @@
 #'
 #' These functions are used to write function files for your package.
 #'
-#' The function `use_ghe_enterprise()` calls all the templating functions:
+#' The function `use_github_enterprise()` calls all the templating functions:
 #'
 #' \describe{
-#'   \item{`use_install_ghe()`}{Writes a file, `utils-install_ghe.R` containing
+#'   \item{`use_install_ghe()`}{Writes a file to the current project,
+#'     `R/utils-install_ghe.R`, containing
 #'     a function `install_github_foo()` that wraps
 #'     `devtools::install_github()`, using the `host` argument of this function.}
-#'   \item{`use_ghe_pat()`}{Writes a file, `utils-ghe_pat.R` containing
+#'   \item{`use_ghe_pat()`}{Writes a file to the current project,
+#'    `R/utils-ghe_pat.R`, containing
 #'     a function `github_foo_pat()` that parallels `devtools::github_pat()`.
 #'     This new function will look for an environment variable
 #'     named `GITHUB_FOO_PAT`.}

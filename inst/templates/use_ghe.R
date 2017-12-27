@@ -11,8 +11,8 @@ use_github_{{suffix}} <- function(organisation = NULL,
                                   private = FALSE,
                                   protocol = c("ssh", "https"),
                                   credentials = NULL,
-                                  auth_token = NULL,
-                                  host = "{{host}}") {
+                                  auth_token = github_{{suffix}}_pat(),
+                                  host = "https://{{host}}") {
 
   usethis::use_github(
     organisation = organisation,

@@ -29,13 +29,15 @@ use_use_ghe(host, suffix, name)
 These functions are used to write function files for your package.
 }
 \details{
-The function \code{use_ghe_enterprise()} calls all the templating functions:
+The function \code{use_github_enterprise()} calls all the templating functions:
 
 \describe{
-\item{\code{use_install_ghe()}}{Writes a file, \code{utils-install_ghe.R} containing
+\item{\code{use_install_ghe()}}{Writes a file to the current project,
+\code{R/utils-install_ghe.R}, containing
 a function \code{install_github_foo()} that wraps
 \code{devtools::install_github()}, using the \code{host} argument of this function.}
-\item{\code{use_ghe_pat()}}{Writes a file, \code{utils-ghe_pat.R} containing
+\item{\code{use_ghe_pat()}}{Writes a file to the current project,
+\code{R/utils-ghe_pat.R}, containing
 a function \code{github_foo_pat()} that parallels \code{devtools::github_pat()}.
 This new function will look for an environment variable
 named \code{GITHUB_FOO_PAT}.}
