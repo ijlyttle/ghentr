@@ -58,9 +58,9 @@ To create your functions, you will need a few things:
 
 - an instance of GitHub Enterprise, used to determine the `host`, e.g. `"github.acme-corp.com/api/v3"`
 
-- a longform `name` to use in your functions' documentation, e.g. `"Acme Corporation"`
+- a concise `suffix` to use in the names of your new functions, e.g. `"acme"`
 
-- a shorter `suffix` to use in the names of your new functions, e.g. `"acme"`
+- a longform `name` to use in your functions' documentation, e.g. `"Acme Corporation"`
 
 These arguments are used with the function `use_github_enterprise()`:
 
