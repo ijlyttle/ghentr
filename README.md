@@ -84,10 +84,6 @@ You can make your package **acmetools** available to your colleagues using code 
 ``` r
 # install.packages("devtools")
 devtools::install_github("foo/acmetools", host = "github.acme-corp.com/api/v3")
-#> Using GitHub PAT from envvar GITHUB_PAT
-#> Downloading GitHub repo foo/acmetools@master
-#> from URL https://github.acme-corp.com/api/v3/repos/foo/acmetools/zipball/master
-#> Installation failed: Received HTTP code 502 from proxy after CONNECT
 ```
 
 If you modified your `.Rprofile` file to load **devtools** automatically into your interactive sessions, you may want also to do the same for **acmetools**.

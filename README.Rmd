@@ -90,7 +90,7 @@ As you know, `devtools::install_github()` uses a GitHub Personal Access Token, n
 
 You can make your package **acmetools** available to your colleagues using code like this:
 
-```{r}
+```{r eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("foo/acmetools", host = "github.acme-corp.com/api/v3")
 ```
