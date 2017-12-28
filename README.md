@@ -77,7 +77,7 @@ Finally, it will copy some text to your clipboard that may be helpful for your `
 Followup steps
 --------------
 
-As you know, `devtools::install_github()` uses a GitHub Personal Access Token, normally stored in an environment variable named `GITHUB_PAT`. The function `acmetools::install_github_acme()` will look for an environment variable named `GITHUB_ACME_PAT`. You and your colleagues will have to create your tokens, then add the information to your `.Renviron` files.
+As you know, `devtools::install_github()` uses a GitHub Personal Access Token, normally stored in an environment variable named `GITHUB_PAT`. The function `acmetools::install_github_acme()` will look for an environment variable named `GITHUB_ACME_PAT`. You and your colleagues will have to create your tokens on the Acme GHE, then add the information to your `.Renviron` files.
 
 You can make your package **acmetools** available to your colleagues using code like this:
 
