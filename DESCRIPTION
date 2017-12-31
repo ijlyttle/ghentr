@@ -22,4 +22,5 @@ Suggests: covr
 Imports: 
     devtools,
     usethis,
-    roxygen2
+    roxygen2,
+    whisker
