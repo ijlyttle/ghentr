@@ -42,7 +42,8 @@ use_repo <- function(name) {
     stop("name not specified", call. = FALSE)
   }
 
-  usethis:::use_description_field("Repository", value = name)
+  # TODO: keep eye open for use_description_field() export
+  use_description_field("Repository", value = name)
 
   invisible(NULL)
 }
@@ -90,9 +91,10 @@ init_drat_repo <- function() {
 
   path <- usethis::proj_get()
 
-  usethis:::todo("Add the following element to options() in your .Rprofile file:")
-  usethis:::code_block(paste0("dratRepo = \"", path, "\""))
-  usethis:::todo(
+  # TODO: keep eye on todo(), code_block() export
+  todo("Add the following element to options() in your .Rprofile file:")
+  code_block(paste0("dratRepo = \"", path, "\""))
+  todo(
     "Create a git repository using usethis::use_git()",
     "Establish remote using your institutions particular use_github()",
     "At your institution's GitHub instance, activate GitHub pages on master branch.",

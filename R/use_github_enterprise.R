@@ -43,7 +43,7 @@
 use_github_enterprise <- function(host, suffix, name) {
 
   data <- list(
-    package_name = usethis:::project_name(),
+    package_name = project_name(), # TODO: keep eye on project_name() export
     host = host,
     suffix = suffix,
     suffix_upper = toupper(suffix),
@@ -57,12 +57,13 @@ use_github_enterprise <- function(host, suffix, name) {
   use_use_ghe(host, suffix, name)
 
   # TODO: feedback on what to put into README
-  usethis:::todo("Run devtools::document()")
-  usethis:::todo(
+  # TODO: keep an eye on when this will be exported
+  todo("Run devtools::document()")
+  todo(
     "Add this to your package's README, manually replacing ",
     "the items inside {curly brackets}."
   )
-  usethis:::code_block(
+  code_block(
     vapply(
       readLines(system.file("templates/ghe.md", package = "ghentr")),
       whisker::whisker.render,

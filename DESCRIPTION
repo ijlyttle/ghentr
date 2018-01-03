@@ -23,4 +23,8 @@ Imports:
     devtools,
     usethis,
     roxygen2,
-    whisker
+    whisker,
+    crayon,
+    clipr,
+    desc,
+    clisymbols
