@@ -44,6 +44,22 @@ devtools::install_github("ijlyttle/ghentr")
 Usage
 -----
 
+There are two use-cases:
+
+-   initalizing and managing a CRAN-like repository using [drat](https://CRAN.R-project.org/package=drat).
+
+-   making functions like `install_github()` for an institution-specific package that work with your instance of GitHub Enterprise.
+
+### Administering with a CRAN-like repository
+
+Two functions:
+
+-   `create_drat_repo()` wraps `usethis::create_project()` and `usethis::use_git()` to mimic `drat::initRepo()`. Encourages you to set your option for `dratRepo`.
+
+-   `use_drat_repo()` adds a line to a package DESCRIPTION file to indicate the name of the repository.
+
+### Working with GithHub Enterprise
+
 To create your functions, you will need a few things:
 
 -   an instance of GitHub Enterprise, used to determine the `host`, e.g. `"github.acme-corp.com/api/v3"`
