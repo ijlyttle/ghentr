@@ -60,11 +60,14 @@ There are two use-cases:
 
 - making functions like `install_github()` for an institution-specific package that work with your instance of GitHub Enterprise. 
 
+Stop the README here, instead, refer to vignettes.
+
+
 ### Administering with a CRAN-like repository
 
 Two functions:
 
-- `create_drat_repo()` wraps `usethis::create_project()` and `usethis::use_git()` to mimic `drat::initRepo()`. Encourages you to set your option for `dratRepo`.
+- `init_drat_repo()` wraps `usethis::create_project()` and `usethis::use_git()` to mimic `drat::initRepo()`. Encourages you to set your option for `dratRepo`.
 
 - `use_drat_repo()` adds a line to a package DESCRIPTION file to indicate the name of the repository.
 
@@ -96,7 +99,7 @@ This function will write three files into the `R` directory of your package proj
 
 - `utils-ghe_pat.R`, containing `github_acme_pat()`
 
-It will also add `roxygen2`, `usethis`, and `devtools` to the `Imports` section of your `DESCRIPTION` file.
+It will also add `usethis`, and `devtools` to the `Imports` section of your `DESCRIPTION` file.
 
 Finally, it will copy some text to your clipboard that may be helpful for your `README` file.
 

@@ -1,0 +1,132 @@
+---
+title: "Using a CRAN-like Repository"
+author: "Ian Lyttle"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{using_repository}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+The goal of this vignette is to show how to create and use a CRAN-like repository deployed to Github Enterprise (GHE). The idea is to use the Drat Repository Archive Template via the [drat]( https://CRAN.R-project.org/package=drat) package, by Dirk Eddelbuettel et al. 
+
+Continuing the use-case of the [GitHub Enterprise vignette](using_ghe.html), let's assume you work at [Acme Corporation](https://en.wikipedia.org/wiki/Acme_Corporation) and that Acme has an instance of GitHub Enterprise (GHE) behind its firewall. You would like to create a CRAN-like repository so that you and your colleagues can install packages from a private repository just as easily as you install packages from CRAN.
+
+![](img/drat_motivation.png)
+
+For the purposes of this vignette, we assume that your CRAN-like repository is named ACMERAN. Once you have established your repository and populated it with packages, anyone within your firewall can `install.packages()` from the repository by adding a line to their `.Rprofile` file:
+
+```{r}
+options(
+  repos = c(
+    CRAN = "https://cran.rstudio.com/",
+    ACMERAN = "https://pages.github.acme-corp.com/ACME-R/ACMERAN/" # add a line like this
+  ),
+  ...
+)
+```
+
+The remainter of this vignette focus on how to create and populate a CRAN-like repository like ACMERAN.
+
+## Usage
+
+For a fuller treatment of this material, you are referred to the **drat** [vignette for package authors](https://cran.r-project.org/web/packages/drat/vignettes/DratForPackageAuthors.html). For private use within an institution, I recommend a slightly different approach, hence this vignette. 
+
+### Creating a repository
+
+A CRAN-like repository is a filesystem made available via a URL, like `"https://cran.rstudio.com"`. If you are installing from source (as opposed to binaries), this filesystem need have only a directory named `src/contrib`.
+
+To start this process, create a new project on your computer:
+
+```{r}
+usethis::create_project("path/to/ACMERAN")
+```
+
+If you are using the RStudio IDE, a new session will open for this project; continue your work there. Your next step is to create the filesystem. A convenience function is provided, `init_drat_repo()`:
+
+```{r}
+ghentr::init_drat_repo()
+```
+
+You will be encouraged to set an option in your `.Rprofile`:
+
+```{r}
+options(
+  dratRepo = "path/to/ACMERAN",
+  ...
+)
+```
+
+The reason to set the `dratRepo` option is to make it easier to add a package to your repository, as **drat** will know where to look.
+
+Next, you should create a git repository for your project. Here is where I suggest doing something differently from what **drat** suggests. If you were to use the `drat::initRepo()` function, it would create a git repository and a `gh-pages` branch. I suggest that you use the `master` branch because it will require you to act explicitly to share the git repository as a web-site. More on this later.
+
+```{r}
+usethis::use_git()
+```
+
+To put this repository onto your (Acme's) instance of GHE, you can use your `acmetools::use_github_acme()` function, as described in the [using GitHub Enterprise vignette](using_ghe.html).
+
+```{r}
+acmetools::use_github_acme()
+```
+
+Finally, go to your repository's page at your GHE website, go to its "Settings" tab, and activate "GitHub Pages" on the master branch.
+
+At this point, you have a fully-functioning CRAN-like repository. You can publicize the URL to your colleages to add to their `options("repos")`. However, for the repository to be useful it needs packages.
+
+### Adding packages to repository
+
+Let's say you have a package called **boomerang**, ready to add to the ACMERAN repository. We will assume that the package-project for **boomerang** is on your computer (having cloned it, if needed), and that your `option("dratRepo")` is set properly. Start with your working directory at the root of the **boomerang** project.
+
+Before adding this package to the ACMERAN repository, it will be useful to identify the repository in the package's DESCRIPTION. This information could be needed by **packrat** or **rsconnect**, to know where to find a particular package. This happens as a part of a package's introduction to CRAN, but it is done by the CRAN administrators. For ACMERAN, this job falls to you or your colleagues. 
+
+This package offers a couple of convenience functions. For ACMETOOLS, if `getOption("dratRepo")` is set, and its `basename()` is `"ACMETOOLS"` or `"acmetools"`, then you can use the `use_drat_repo()` function. If not, you can use the `use_repo()` function.
+
+```{r}
+basename(getOption("dratRepo")) # check to see if "equivalent" to repository name
+```
+
+```{r}
+# use one of these
+
+# yes - name is equivalent
+use_drat_repo()
+
+# no - name is not eqivalent
+use_repo("ACMETOOLS")
+```
+
+This will add a field, `"Repository: ACMETOOLS"` to **boomerang**'s DESCRIPTION file.
+
+Next, check and build the package:
+
+```{r}
+devtools::check() 
+devtools::build()
+```
+
+The `build()` function, if successful, returns a string describing the path to package file:
+
+```
+[1] "path/to/boomerang.tar.gz"
+```
+
+Now that you have this file, you can use **drat** to add it to your repository. The function `drat::addRepo()` uses `getOption("dratRepo")` as its default location for the drat repository.
+
+```{r}
+drat::addRepo("path/to/boomerang.tar.gz")
+```
+
+When you commit and push your ACMETOOLS project to Acme's GHE, the **boomerang** package will be available using `install.packages("boomerang")`.
+
+## Using repository externally
+
+### Questions
+
+If things need to be compiled, then what?

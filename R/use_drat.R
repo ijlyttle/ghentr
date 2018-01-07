@@ -23,7 +23,7 @@
 #'
 use_drat_repo <- function() {
 
-  name <- basename(getOption("dratRepo", default = ""))
+  name <- toupper(basename(getOption("dratRepo", default = "")))
 
   if (identical(nchar(name), 0L)) {
     stop("name not specified - is option 'dratRepo' set?", call. = FALSE)

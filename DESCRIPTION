@@ -2,7 +2,10 @@ Package: ghentr
 Title: Templating Functions to Use with GitHub Enterprise
 Version: 0.0.0.9000
 Authors@R: c(
-  person(given = "Ian", family = "Lyttle", email = "ian.lyttle@schneider-electric.com", role = c("aut", "cre"))
+  person(given = "Ian", family = "Lyttle", email = "ian.lyttle@schneider-electric.com", role = c("aut", "cre")),
+  person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("ctb"), 
+    comment = c(ORCID = "0000-0003-4757-117X")
+  )
   )
 Description: The devtools package provides a couple of useful functions for 
  for working with GitHub: install_github(), to install packages from GitHub, 
@@ -18,8 +21,11 @@ URL: https://github.com/ijlyttle/ghentr
 BugReports: https://github.com/ijlyttle/ghentr/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
-Suggests: covr,
-    drat
+Suggests: 
+    covr,
+    drat,
+    knitr,
+    rmarkdown
 Imports:
     devtools,
     usethis,
@@ -29,3 +35,4 @@ Imports:
     clipr,
     desc,
     clisymbols
+VignetteBuilder: knitr
