@@ -81,75 +81,25 @@
 <div id="ghentr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ghentr" class="anchor"></a>ghentr</h1></div>
-<p>The goal of ghentr is to make it easier for you to build custom functions to access your instance of GitHub Enterprise.</p>
+<p>The goal of ghentr is to make it easier for you to build and share a private package-ecosystem using your instance of GitHub Enterprise.</p>
 <p>You are likely already using the functions <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code> and <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code> to interact with <code>github.com</code>. If you have an instance GitHub Enterprise (GHE), you can also use these functions with GHE.</p>
 <p>Let’s say that you work for <a href="https://en.wikipedia.org/wiki/Acme_Corporation">Acme Corporation</a>, and that Acme has its own instance of GHE. At present, you could install a package using the <code>host</code> argument with <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"user/repo"</span>, <span class="dt">host =</span> <span class="st">"github.acme-corp.com/api/v3"</span>)</code></pre></div>
 <p>In time, it may become tiresome to add the host argument each time you want to install a package from GHE. Instead, it might be handy to create a function to do this for you, then put that function into a package that you can use and make available to your colleagues. This is what <strong>ghentr</strong> helps you to do.</p>
-<p>Let’s say you create a package called <strong>acmetools</strong>. Using templating functions in this package, you can add a function to your package would allow to use syntax like this:</p>
+<p>Assuming you create a package called <strong>acmetools</strong>, you can use templating functions in <strong>ghentr</strong> to add a function to <strong>acmetools</strong> that would allow you to use syntax like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wraps devtools::install_github()</span>
 acmetools<span class="op">::</span><span class="kw">install_github_acme</span>(<span class="st">"user/repo"</span>)</code></pre></div>
-<p>Furthermore, you can use the templating functions in your package to create a function to make it easier to create a package repository at your instance of GHE:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wraps usethis::use_github()</span>
-acmetools<span class="op">::</span><span class="kw">use_github_acme</span>()</code></pre></div>
+<p>There are two ways <strong>ghentr</strong> can help you work with GitHub Enterprise:</p>
+<ul>
+<li><p>To make functions that wrap <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code> and <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code>, described in an <a href="https://ijlyttle.github.io/ghentr/articles/using_ghe.html">article</a>.</p></li>
+<li><p>To initalize and manage a private CRAN-like repository using <a href="https://CRAN.R-project.org/package=drat">drat</a>, described in another <a href="https://ijlyttle.github.io/ghentr/articles/using_repository.html">article</a>.</p></li>
+</ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install ghentr from github with:</p>
+<p>You can install ghentr from GitHub with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"ijlyttle/ghentr"</span>)</code></pre></div>
-</div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<p>There are two use-cases:</p>
-<ul>
-<li><p>initalizing and managing a CRAN-like repository using <a href="https://CRAN.R-project.org/package=drat">drat</a>.</p></li>
-<li><p>making functions like <code>install_github()</code> for an institution-specific package that work with your instance of GitHub Enterprise.</p></li>
-</ul>
-<p>Stop the README here, instead, refer to vignettes.</p>
-<div id="administering-with-a-cran-like-repository" class="section level3">
-<h3 class="hasAnchor">
-<a href="#administering-with-a-cran-like-repository" class="anchor"></a>Administering with a CRAN-like repository</h3>
-<p>Two functions:</p>
-<ul>
-<li><p><code><a href="reference/init_drat_repo.html">init_drat_repo()</a></code> wraps <code><a href="http://www.rdocumentation.org/packages/usethis/topics/create_package">usethis::create_project()</a></code> and <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_git">usethis::use_git()</a></code> to mimic <code><a href="http://www.rdocumentation.org/packages/drat/topics/initRepo">drat::initRepo()</a></code>. Encourages you to set your option for <code>dratRepo</code>.</p></li>
-<li><p><code><a href="reference/use_drat_repo.html">use_drat_repo()</a></code> adds a line to a package DESCRIPTION file to indicate the name of the repository.</p></li>
-</ul>
-</div>
-<div id="working-with-githhub-enterprise" class="section level3">
-<h3 class="hasAnchor">
-<a href="#working-with-githhub-enterprise" class="anchor"></a>Working with GithHub Enterprise</h3>
-<p>To create your functions, you will need a few things:</p>
-<ul>
-<li><p>an instance of GitHub Enterprise, used to determine the <code>host</code>, e.g. <code>"github.acme-corp.com/api/v3"</code></p></li>
-<li><p>a concise <code>suffix</code> to use in the names of your new functions, e.g. <code>"acme"</code></p></li>
-<li><p>a longform <code>name</code> to use in your functions’ documentation, e.g. <code>"Acme Corporation"</code></p></li>
-</ul>
-<p>These arguments are used with the function <code><a href="reference/use_github_enterprise.html">use_github_enterprise()</a></code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_github_enterprise">use_github_enterprise</a></span>(
-  <span class="dt">host =</span> <span class="st">"github.acme-corp.com/api/v3"</span>,
-  <span class="dt">suffix =</span> <span class="st">"acme"</span>,
-  <span class="dt">name =</span> <span class="st">"Acme Corporation"</span>
-)</code></pre></div>
-<p>This function will write three files into the <code>R</code> directory of your package project:</p>
-<ul>
-<li><p><code>utils-use_ghe.R</code>, containing <code>use_github_acme()</code></p></li>
-<li><p><code>utils-install_ghe.R</code>, containing <code>install_github_acme()</code></p></li>
-<li><p><code>utils-ghe_pat.R</code>, containing <code>github_acme_pat()</code></p></li>
-</ul>
-<p>It will also add <code>usethis</code>, and <code>devtools</code> to the <code>Imports</code> section of your <code>DESCRIPTION</code> file.</p>
-<p>Finally, it will copy some text to your clipboard that may be helpful for your <code>README</code> file.</p>
-</div>
-</div>
-<div id="followup-steps" class="section level2">
-<h2 class="hasAnchor">
-<a href="#followup-steps" class="anchor"></a>Followup steps</h2>
-<p>As you know, <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code> uses a GitHub Personal Access Token, normally stored in an environment variable named <code>GITHUB_PAT</code>. The function <code>acmetools::install_github_acme()</code> will look for an environment variable named <code>GITHUB_ACME_PAT</code>. You and your colleagues will have to create your tokens on the Acme GHE, then add the information to your <code>.Renviron</code> files.</p>
-<p>You can make your package <strong>acmetools</strong> available to your colleagues using code like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"foo/acmetools"</span>, <span class="dt">host =</span> <span class="st">"github.acme-corp.com/api/v3"</span>)</code></pre></div>
-<p>If you modified your <code>.Rprofile</code> file to load <strong>devtools</strong> automatically into your interactive sessions, you may want also to do the same for <strong>acmetools</strong>.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">

@@ -125,7 +125,7 @@ drat::addRepo("path/to/boomerang.tar.gz")
 
 When you commit and push your ACMETOOLS project to Acme's GHE, the **boomerang** package will be available using `install.packages("boomerang")`.
 
-## Using repository externally
+### Using repository externally
 
 ### Questions
 

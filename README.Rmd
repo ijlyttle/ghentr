@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 # ghentr
 
-The goal of ghentr is to make it easier for you to build custom functions to access your instance of GitHub Enterprise.
+The goal of ghentr is to make it easier for you to build and share a private package-ecosystem using your instance of GitHub Enterprise.
 
 You are likely already using the functions `devtools::install_github()` and `usethis::use_github()` to interact with `github.com`. If you have an instance GitHub Enterprise (GHE), you can also use these functions with GHE.
 
@@ -29,92 +29,28 @@ devtools::install_github("user/repo", host = "github.acme-corp.com/api/v3")
 
 In time, it may become tiresome to add the host argument each time you want to install a package from GHE. Instead, it might be handy to create a function to do this for you, then put that function into a package that you can use and make available to your colleagues. This is what **ghentr** helps you to do. 
 
-Let's say you create a package called **acmetools**. Using templating functions in this package, you can add a function to your package would allow to use syntax like this:
+Assuming you create a package called **acmetools**, you can use templating functions in **ghentr** to add a function to **acmetools** that would allow you to use syntax like this:
 
 ```{r eval=FALSE}
 # wraps devtools::install_github()
 acmetools::install_github_acme("user/repo")
 ```
 
-Furthermore, you can use the templating functions in your package to create a function to make it easier to create a package repository at your instance of GHE:
+There are two ways **ghentr** can help you work with GitHub Enterprise: 
 
-```{r eval=FALSE}
-# wraps usethis::use_github()
-acmetools::use_github_acme()
-```
+- To make functions that wrap `devtools::install_github()` and `usethis::use_github()`, described in an [article](https://ijlyttle.github.io/ghentr/articles/using_ghe.html).
+
+- To initalize and manage a private CRAN-like repository using [drat](https://CRAN.R-project.org/package=drat), described in another [article](https://ijlyttle.github.io/ghentr/articles/using_repository.html).
 
 ## Installation
 
-You can install ghentr from github with:
+You can install ghentr from GitHub with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("ijlyttle/ghentr")
 ```
 
-## Usage
-
-There are two use-cases: 
-
-- initalizing and managing a CRAN-like repository using [drat](https://CRAN.R-project.org/package=drat).
-
-- making functions like `install_github()` for an institution-specific package that work with your instance of GitHub Enterprise. 
-
-Stop the README here, instead, refer to vignettes.
-
-
-### Administering with a CRAN-like repository
-
-Two functions:
-
-- `init_drat_repo()` wraps `usethis::create_project()` and `usethis::use_git()` to mimic `drat::initRepo()`. Encourages you to set your option for `dratRepo`.
-
-- `use_drat_repo()` adds a line to a package DESCRIPTION file to indicate the name of the repository.
-
-### Working with GithHub Enterprise
-
-To create your functions, you will need a few things:
-
-- an instance of GitHub Enterprise, used to determine the `host`, e.g. `"github.acme-corp.com/api/v3"`
-
-- a concise `suffix` to use in the names of your new functions, e.g. `"acme"`
-
-- a longform `name` to use in your functions' documentation, e.g. `"Acme Corporation"`
-
-These arguments are used with the function `use_github_enterprise()`:
-
-```{r eval=FALSE}
-ghentr::use_github_enterprise(
-  host = "github.acme-corp.com/api/v3",
-  suffix = "acme",
-  name = "Acme Corporation"
-)
-```
-
-This function will write three files into the `R` directory of your package project:
-
-- `utils-use_ghe.R`, containing `use_github_acme()`
-
-- `utils-install_ghe.R`, containing `install_github_acme()`
-
-- `utils-ghe_pat.R`, containing `github_acme_pat()`
-
-It will also add `usethis`, and `devtools` to the `Imports` section of your `DESCRIPTION` file.
-
-Finally, it will copy some text to your clipboard that may be helpful for your `README` file.
-
-## Followup steps
-
-As you know, `devtools::install_github()` uses a GitHub Personal Access Token, normally stored in an environment variable named `GITHUB_PAT`. The function `acmetools::install_github_acme()` will  look for an environment variable named `GITHUB_ACME_PAT`. You and your colleagues will have to create your tokens on the Acme GHE, then add the information to your `.Renviron` files.
-
-You can make your package **acmetools** available to your colleagues using code like this:
-
-```{r eval=FALSE}
-# install.packages("devtools")
-devtools::install_github("foo/acmetools", host = "github.acme-corp.com/api/v3")
-```
-
-If you modified your `.Rprofile` file to load **devtools** automatically into your interactive sessions, you may want also to do the same for **acmetools**. 
 
 ## Code of Conduct
 
