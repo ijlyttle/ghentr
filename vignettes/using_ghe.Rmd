@@ -33,7 +33,7 @@ If you don't already have an institution-specific package, this is your invitati
 usethis::create_package("~/r-packages/acmetools")
 ```
 
-At this point, if you are using the RStudio IDE, a new RStudio project will open. Your subsquent work will be in this newly-created project which.
+At this point, if you are using the RStudio IDE, a new RStudio project will open. Your subsquent work will be in this newly-created project.
 
 ### Create functions
 
@@ -69,7 +69,7 @@ Finally, some packages are added to the `Imports` field of **acmetools** `DESCRI
 
 ### Followup
 
-Using the information you provided, ghentr writes out fully-documented functions in your newly-created files. You may wish to amend the documentation, then run `devtools::document()` when you are done.
+Using the information you provided, **ghentr** writes out fully-documented functions in your newly-created files. You may wish to amend the documentation, then run `devtools::document()` when you are done.
 
 As you know, `devtools::install_github()` uses a GitHub Personal Access Token (PAT), normally stored in an environment variable named GITHUB_PAT. Similarly, your function acmetools::install_github_acme() will look for an environment variable named GITHUB_ACME_PAT. 
 

@@ -97,7 +97,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You may want to call your package something different,</span>
 <span class="co"># as well as specify a different path on your computer.</span>
 usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/create_package">create_package</a></span>(<span class="st">"~/r-packages/acmetools"</span>)</code></pre></div>
-<p>At this point, if you are using the RStudio IDE, a new RStudio project will open. Your subsquent work will be in this newly-created project which.</p>
+<p>At this point, if you are using the RStudio IDE, a new RStudio project will open. Your subsquent work will be in this newly-created project.</p>
 </div>
 <div id="create-functions" class="section level3">
 <h3 class="hasAnchor">
@@ -126,7 +126,7 @@ usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumenta
 <div id="followup" class="section level3">
 <h3 class="hasAnchor">
 <a href="#followup" class="anchor"></a>Followup</h3>
-<p>Using the information you provided, ghentr writes out fully-documented functions in your newly-created files. You may wish to amend the documentation, then run <code><a href="http://www.rdocumentation.org/packages/devtools/topics/document">devtools::document()</a></code> when you are done.</p>
+<p>Using the information you provided, <strong>ghentr</strong> writes out fully-documented functions in your newly-created files. You may wish to amend the documentation, then run <code><a href="http://www.rdocumentation.org/packages/devtools/topics/document">devtools::document()</a></code> when you are done.</p>
 <p>As you know, <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code> uses a GitHub Personal Access Token (PAT), normally stored in an environment variable named GITHUB_PAT. Similarly, your function acmetools::install_github_acme() will look for an environment variable named GITHUB_ACME_PAT.</p>
 <p>Accordingly, you (and anyone who would use <strong>acmetools</strong>) should get a PAT from the Acme GHE, then add it to your <code>.Renviron</code> file:</p>
 <pre><code>GITHUB_ACME_PAT="acme-pat-goes-here"</code></pre>

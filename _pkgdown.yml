@@ -1,3 +1,23 @@
 template:
   params:
     bootswatch: sandstone
+
+reference:
+  - title: "Connecting to GitHub Enterprise"
+    desc: >
+      Templating functions you can use to put functions like `install_github()`
+      into your institution-specific package to work with your instance of
+      GitHub Enterprise.
+      See this [article](../articles/using_ghe.html) for more details.
+    contents:
+      - use_github_enterprise
+  - title: "Creating a private CRAN-like repository"
+    desc: >
+      Functions to help you establish and populate create a private CRAN-like
+      repository deployed to Github Enterprise (GHE).
+      The idea is to use the Drat Repository Archive Template
+      via the [drat](https://CRAN.R-project.org/package=drat).
+      See this [article](../articles/using_repository.html) for more details.
+    contents:
+      - init_drat_repo
+      - use_drat_repo

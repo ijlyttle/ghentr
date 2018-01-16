@@ -37,7 +37,7 @@ You can install ghentr from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("r-lib/usethis") # uses, for now, dev version
+devtools::install_github("r-lib/usethis") # uses dev version, for now
 devtools::install_github("ijlyttle/ghentr")
 ```
 
