@@ -75,7 +75,7 @@
       <h1>Using a CRAN-like Repository</h1>
                         <h4 class="author">Ian Lyttle</h4>
             
-            <h4 class="date">2018-01-07</h4>
+            <h4 class="date">2018-01-16</h4>
           </div>
 
     
@@ -86,7 +86,7 @@
 <div class="figure">
 <img src="img/drat_motivation.png">
 </div>
-<p>For the purposes of this vignette, we assume that your CRAN-like repository is named ACMERAN. Once you have established your repository and populated it with packages, anyone within your firewall can <code>install.packages()</code> from the repository by adding a line to their <code>.Rprofile</code> file:</p>
+<p>Let’s assume that your CRAN-like repository is named ACMERAN. Once you have established your repository and populated it with packages, anyone within your firewall can <code>install.packages()</code> from the repository by adding a line to their <code>.Rprofile</code> file. As the adminstrator, you will need to determine your particular URL and publicize it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(
   <span class="dt">repos =</span> <span class="kw">c</span>(
     <span class="dt">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>,
@@ -94,11 +94,11 @@
   ),
   ...
 )</code></pre></div>
-<p>The remainter of this vignette focus on how to create and populate a CRAN-like repository like ACMERAN.</p>
+<p>The remainder of this vignette focuses on how to create and populate a CRAN-like repository like ACMERAN.</p>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>For a fuller treatment of this material, you are referred to the <strong>drat</strong> <a href="https://cran.r-project.org/web/packages/drat/vignettes/DratForPackageAuthors.html">vignette for package authors</a>. For private use within an institution, I recommend a slightly different approach, hence this vignette.</p>
+<p>For a fuller treatment of this material, please read this <strong>drat</strong> <a href="https://cran.r-project.org/web/packages/drat/vignettes/DratForPackageAuthors.html">vignette for package authors</a>. The original purpose of <strong>drat</strong> was to personal repositories publically available on <code>github.com</code>. For private use within an institution, I recommend a slightly different approach, hence this vignette.</p>
 <div id="creating-a-repository" class="section level3">
 <h3 class="hasAnchor">
 <a href="#creating-a-repository" class="anchor"></a>Creating a repository</h3>
@@ -112,8 +112,8 @@
   <span class="dt">dratRepo =</span> <span class="st">"path/to/ACMERAN"</span>,
   ...
 )</code></pre></div>
-<p>The reason to set the <code>dratRepo</code> option is to make it easier to add a package to your repository, as <strong>drat</strong> will know where to look.</p>
-<p>Next, you should create a git repository for your project. Here is where I suggest doing something differently from what <strong>drat</strong> suggests. If you were to use the <code><a href="http://www.rdocumentation.org/packages/drat/topics/initRepo">drat::initRepo()</a></code> function, it would create a git repository and a <code>gh-pages</code> branch. I suggest that you use the <code>master</code> branch because it will require you to act explicitly to share the git repository as a web-site. More on this later.</p>
+<p>The reason for you, as the adminstrator, to set the <code>dratRepo</code> option is to make it easier for you to add a package to your repository; <strong>drat</strong> will know where to look.</p>
+<p>Next, you should create a git repository for your project. Here is where I suggest doing something differently from what <strong>drat</strong> suggests. If you were to use the <code><a href="http://www.rdocumentation.org/packages/drat/topics/initRepo">drat::initRepo()</a></code> function, it would create a git repository and a <code>gh-pages</code> branch. I suggest that you use the <code>master</code> branch because it will require you to act explicitly to share the git repository as a web-site; more on this later.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/use_git">use_git</a></span>()</code></pre></div>
 <p>To put this repository onto your (Acme’s) instance of GHE, you can use your <code>acmetools::use_github_acme()</code> function, as described in the <a href="using_ghe.html">using GitHub Enterprise vignette</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acmetools<span class="op">::</span><span class="kw">use_github_acme</span>()</code></pre></div>
@@ -123,17 +123,18 @@
 <div id="adding-packages-to-repository" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-packages-to-repository" class="anchor"></a>Adding packages to repository</h3>
-<p>Let’s say you have a package called <strong>boomerang</strong>, ready to add to the ACMERAN repository. We will assume that the package-project for <strong>boomerang</strong> is on your computer (having cloned it, if needed), and that your <code>option("dratRepo")</code> is set properly. Start with your working directory at the root of the <strong>boomerang</strong> project.</p>
-<p>Before adding this package to the ACMERAN repository, it will be useful to identify the repository in the package’s DESCRIPTION. This information could be needed by <strong>packrat</strong> or <strong>rsconnect</strong>, to know where to find a particular package. This happens as a part of a package’s introduction to CRAN, but it is done by the CRAN administrators. For ACMERAN, this job falls to you or your colleagues.</p>
-<p>This package offers a couple of convenience functions. For ACMETOOLS, if <code>getOption("dratRepo")</code> is set, and its <code>basename()</code> is <code>"ACMETOOLS"</code> or <code>"acmetools"</code>, then you can use the <code><a href="../reference/use_drat_repo.html">use_drat_repo()</a></code> function. If not, you can use the <code><a href="../reference/use_drat_repo.html">use_repo()</a></code> function.</p>
+<p>Let’s say you have a package called <strong>boomerang</strong>, and it ready to add to the ACMERAN repository. We will assume that the package-project for <strong>boomerang</strong> is on your computer (having cloned it, if needed), and that your <code>option("dratRepo")</code> is set properly. Start by opening the <strong>boomerang</strong> project in your RStudio IDE, ensuring your working directory is the project’s root direcory.</p>
+<p>In a package’s DESCRIPTION file, there may a field called <code>Repository</code>. You may not have noticed it before now because it is added by the CRAN mainatiners. This field is needed by <strong>packrat</strong> or <strong>rsconnect</strong>, so that they know where to find the source for a particular package. As the adminstrator for ACMERAN, this is your job to make sure this field is correct for all the packages added to ACMERAN.</p>
+<p>The <strong>ghentr</strong> package offers a couple of functions to set the <code>Repository</code> field in your new package’s DESCRIPTION. For ACMETOOLS, if <code>getOption("dratRepo")</code> is set, and its <code>basename()</code> is <code>"ACMETOOLS"</code> or <code>"acmetools"</code>, then you can use the <code><a href="../reference/use_drat_repo.html">use_drat_repo()</a></code> function. If not, you can use the <code><a href="../reference/use_drat_repo.html">use_repo()</a></code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">basename</span>(<span class="kw">getOption</span>(<span class="st">"dratRepo"</span>)) <span class="co"># check to see if "equivalent" to repository name</span></code></pre></div>
+<p>From the somewhere in the package directory for <strong>boomerang</strong>, you can run:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use one of these</span>
 
 <span class="co"># yes - name is equivalent</span>
-<span class="kw"><a href="../reference/use_drat_repo.html">use_drat_repo</a></span>()
+ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_drat_repo">use_drat_repo</a></span>()
 
 <span class="co"># no - name is not eqivalent</span>
-<span class="kw"><a href="../reference/use_drat_repo.html">use_repo</a></span>(<span class="st">"ACMETOOLS"</span>)</code></pre></div>
+ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_drat_repo">use_repo</a></span>(<span class="st">"ACMETOOLS"</span>)</code></pre></div>
 <p>This will add a field, <code>"Repository: ACMETOOLS"</code> to <strong>boomerang</strong>’s DESCRIPTION file.</p>
 <p>Next, check and build the package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/check">check</a></span>() 
@@ -142,16 +143,24 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <pre><code>[1] "path/to/boomerang.tar.gz"</code></pre>
 <p>Now that you have this file, you can use <strong>drat</strong> to add it to your repository. The function <code><a href="http://www.rdocumentation.org/packages/drat/topics/addRepo">drat::addRepo()</a></code> uses <code>getOption("dratRepo")</code> as its default location for the drat repository.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drat<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/drat/topics/addRepo">addRepo</a></span>(<span class="st">"path/to/boomerang.tar.gz"</span>)</code></pre></div>
-<p>When you commit and push your ACMETOOLS project to Acme’s GHE, the <strong>boomerang</strong> package will be available using <code>install.packages("boomerang")</code>.</p>
+<p>When you commit and push your ACMETOOLS project to Acme’s GHE, the <strong>boomerang</strong> package will be available to anyone who has identified the ACMETOOLS repository, by using <code>install.packages("boomerang")</code>.</p>
+</div>
+<div id="source-repository" class="section level3">
+<h3 class="hasAnchor">
+<a href="#source-repository" class="anchor"></a>Source repository</h3>
+<p>One note, in my experience it may occasionally be necessary to install packages using the <code>type</code> option, <code>install.packages("boomerang", type = "source")</code>. As <strong>drat</strong> explains, its purpose is to act only as a source repository, as opposed to a binary repository. As a result, if you add pacakages to ACMERAN that require compilation, your users will need the appropriate compilation-environment, e.g. <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> for Windows.</p>
+<p>If you want to provide binaries, this is possible, but this goes beyond the scope of <strong>ghentr</strong> and <strong>drat</strong>.</p>
 </div>
 <div id="using-repository-externally" class="section level3">
 <h3 class="hasAnchor">
 <a href="#using-repository-externally" class="anchor"></a>Using repository externally</h3>
+<p>Within your institution, you may want to install packages from your private repository, ACMERAN, on a virtual machine (or other such computer) outside your firewall. This section will walk you through how to do that from a technical point-of-view. Of course, you should check with your management to see if this solution is permissable as a matter of policy.</p>
+<div class="figure">
+<img src="img/drat_external_motivation.png">
 </div>
-<div id="questions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#questions" class="anchor"></a>Questions</h3>
-<p>If things need to be compiled, then what?</p>
+<p>The first thing is to think of ACMERAN as being a <strong>git</strong> repository. From your computer’s point-of-view, within the firewall, you can have a remote that points to your instance of GHE. You can also have a remote that points to a private repository at <code>github.com</code>.</p>
+<p>From inside the firewall, you could pull the ACMERAN repository from your GHE, then push it to (private) <code>github.com</code>. From your resource outside the firewall, you could then pull the repository from <code>github.com</code> to a directory on that resource. Also on that resource, you could amend an <code>.Rprofile</code> file (or <code>.Rprofile.site</code>). Keep in mind that the URL that you provide for a package repository can be a <code>file://</code> URL on your local machine.</p>
+<p>Given the rise of Docker, it occurs to me that this may be a use-case for it. However, I have to confess to not having used Docker - so I am in no position to recommend it (or not).</p>
 </div>
 </div>
 </div>

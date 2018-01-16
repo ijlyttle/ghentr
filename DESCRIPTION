@@ -28,7 +28,7 @@ Suggests:
     rmarkdown
 Imports:
     devtools,
-    usethis,
+    usethis (>= 1.1.0.9000),
     roxygen2,
     whisker,
     crayon,

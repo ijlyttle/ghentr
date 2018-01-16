@@ -48,9 +48,9 @@ You can install ghentr from GitHub with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
+devtools::install_github("r-lib/usethis") # uses, for now, dev version
 devtools::install_github("ijlyttle/ghentr")
 ```
-
 
 ## Code of Conduct
 
