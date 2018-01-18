@@ -127,7 +127,7 @@
 <p>Let’s say you have a package called <strong>boomerang</strong>, and it is ready to add to the ACMERAN repository. We will assume that the package-project for <strong>boomerang</strong> is on your computer (having cloned it, if needed), and that your <code>option("dratRepo")</code> is set properly.</p>
 <p>Start by opening the <strong>boomerang</strong> project in your RStudio IDE, ensuring your working directory is the project’s root direcory.</p>
 <p>In a package’s <code>DESCRIPTION</code> file, there may a field called <code>Repository</code>. You may not have noticed it before now because it is added by the CRAN mainatiners. This field is needed by <strong>packrat</strong> or <strong>rsconnect</strong>, so that they know where to find the source for a particular package. As the adminstrator for ACMERAN, this is your job to make sure this field is correct for all the packages added to ACMERAN.</p>
-<p>The <strong>ghentr</strong> package offers a couple of functions to set the <code>Repository</code> field in your new package’s <code>DESCRIPTION</code>. For ACMETOOLS, if <code>getOption("dratRepo")</code> is set, and its <code>basename()</code> is <code>"ACMETOOLS"</code> or <code>"acmetools"</code>, then you can use the <code><a href="../reference/use_drat_repo.html">use_drat_repo()</a></code> function. If not, you can use the <code><a href="../reference/use_drat_repo.html">use_repo()</a></code> function.</p>
+<p>The <strong>ghentr</strong> package offers a couple of functions to set the <code>Repository</code> field in your new package’s <code>DESCRIPTION</code>. For ACMERAN, if <code>getOption("dratRepo")</code> is set, and its <code>basename()</code> is <code>"ACMERAN"</code> or <code>"acmeran"</code>, then you can use the <code><a href="../reference/use_drat_repo.html">use_drat_repo()</a></code> function. If not, you can use the <code><a href="../reference/use_drat_repo.html">use_repo()</a></code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">basename</span>(<span class="kw">getOption</span>(<span class="st">"dratRepo"</span>)) <span class="co"># check to see if "equivalent" to repository name</span></code></pre></div>
 <p>From the somewhere in the package directory for <strong>boomerang</strong>, you can run:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use one of these</span>
@@ -136,8 +136,8 @@
 ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_drat_repo">use_drat_repo</a></span>()
 
 <span class="co"># no - name is not eqivalent</span>
-ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_drat_repo">use_repo</a></span>(<span class="st">"ACMETOOLS"</span>)</code></pre></div>
-<p>This will add the field <code>"Repository: ACMETOOLS"</code> to <strong>boomerang</strong>’s DESCRIPTION file.</p>
+ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_drat_repo">use_repo</a></span>(<span class="st">"ACMERAN"</span>)</code></pre></div>
+<p>This will add the field <code>"Repository: ACMERAN"</code> to <strong>boomerang</strong>’s DESCRIPTION file.</p>
 <p>Next, check and build the package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/check">check</a></span>() 
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/build">build</a></span>()</code></pre></div>
@@ -145,7 +145,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <pre><code>[1] "path/to/boomerang.tar.gz"</code></pre>
 <p>Now that you have this file, you can use <strong>drat</strong> to add it to your repository. The function <code><a href="http://www.rdocumentation.org/packages/drat/topics/insertPackage">drat::insertPackage()</a></code> uses <code>getOption("dratRepo")</code> as its default location for the drat repository.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drat<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/drat/topics/insertPackage">insertPackage</a></span>(<span class="st">"path/to/boomerang.tar.gz"</span>)</code></pre></div>
-<p>When you commit and push your ACMETOOLS project to Acme’s GHE, the <strong>boomerang</strong> package will be available to anyone who has identified the ACMETOOLS repository, by using <code>install.packages("boomerang")</code>.</p>
+<p>When you commit and push your ACMERAN project to Acme’s GHE, the <strong>boomerang</strong> package will be available to anyone who has identified the ACMERAN repository, by using <code>install.packages("boomerang")</code>.</p>
 </div>
 <div id="source-repository" class="section level3">
 <h3 class="hasAnchor">
