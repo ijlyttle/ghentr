@@ -75,7 +75,7 @@
       <h1>Using a CRAN-like Repository</h1>
                         <h4 class="author">Ian Lyttle</h4>
             
-            <h4 class="date">2018-01-16</h4>
+            <h4 class="date">2018-01-18</h4>
           </div>
 
     
@@ -143,8 +143,8 @@ ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/build">build</a></span>()</code></pre></div>
 <p>The <code>build()</code> function, if successful, returns a string describing the path to package file:</p>
 <pre><code>[1] "path/to/boomerang.tar.gz"</code></pre>
-<p>Now that you have this file, you can use <strong>drat</strong> to add it to your repository. The function <code><a href="http://www.rdocumentation.org/packages/drat/topics/addRepo">drat::addRepo()</a></code> uses <code>getOption("dratRepo")</code> as its default location for the drat repository.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drat<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/drat/topics/addRepo">addRepo</a></span>(<span class="st">"path/to/boomerang.tar.gz"</span>)</code></pre></div>
+<p>Now that you have this file, you can use <strong>drat</strong> to add it to your repository. The function <code><a href="http://www.rdocumentation.org/packages/drat/topics/insertPackage">drat::insertPackage()</a></code> uses <code>getOption("dratRepo")</code> as its default location for the drat repository.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drat<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/drat/topics/insertPackage">insertPackage</a></span>(<span class="st">"path/to/boomerang.tar.gz"</span>)</code></pre></div>
 <p>When you commit and push your ACMETOOLS project to Acme’s GHE, the <strong>boomerang</strong> package will be available to anyone who has identified the ACMETOOLS repository, by using <code>install.packages("boomerang")</code>.</p>
 </div>
 <div id="source-repository" class="section level3">

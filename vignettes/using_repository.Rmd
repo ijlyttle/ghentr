@@ -124,10 +124,10 @@ The `build()` function, if successful, returns a string describing the path to p
 [1] "path/to/boomerang.tar.gz"
 ```
 
-Now that you have this file, you can use **drat** to add it to your repository. The function `drat::addRepo()` uses `getOption("dratRepo")` as its default location for the drat repository.
+Now that you have this file, you can use **drat** to add it to your repository. The function `drat::insertPackage()` uses `getOption("dratRepo")` as its default location for the drat repository.
 
 ```{r}
-drat::addRepo("path/to/boomerang.tar.gz")
+drat::insertPackage("path/to/boomerang.tar.gz")
 ```
 
 When you commit and push your ACMETOOLS project to Acme's GHE, the **boomerang** package will be available to anyone who has identified the ACMETOOLS repository, by using `install.packages("boomerang")`.
