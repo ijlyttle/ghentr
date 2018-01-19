@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 ---
 
-In the initial shakedown of this package, my colleage Emily Bosak and I found some glitches.
+In the initial shakedown of this package, my colleague Emily Bosak and I found some glitches.
 
 ## Too many repos
 
@@ -48,7 +48,7 @@ This is an issue we have seen on Windows 7 - we were not able to test on any oth
 
 This appears when using `usethis::use_github()` or local variation of it, using SSH for the git remotes.
 
-One of the functions that `usethis::use_github()` relies on is `git2r::push()` - the `credentials` argument to `use_github()` is passed to `push()`. If its value is `NULL` (the default), then `push()` will pass the request for credentials to an ssh-agent. I find that this works will on Mac, but I am having trouble to establish an ssh-agent on Windows that can make itself known to **git2r**.
+One of the functions that `usethis::use_github()` relies on is `git2r::push()` - the `credentials` argument to `use_github()` is passed to `push()`. If its value is `NULL` (the default), then `push()` will pass the request for credentials to an ssh-agent. I find that this works well on Mac, but I am having trouble to establish an ssh-agent on Windows that can make itself known to **git2r**.
 
 Thus, when we tried this:
 
@@ -81,11 +81,11 @@ Luckily, there is an alternative, the `credentials` argument and the function `g
 
 If you created your keys using the RStudio IDE, it will put them in `"C:/Users/username/.ssh"`.
 
-The function `git2r::cred_ssh_key()` looks for your keys in the diectory `"~/.ssh"`. On Windows, this may be problematic. When we type `path.expand("~")`, we get `"C:/Users/username/Documents"`. This means that `git2r::cred_ssh_key()` looks for our keys in `"C:/Users/username/Documents/.ssh"`; they aren't there!
+The function `git2r::cred_ssh_key()` looks for your keys in the directory `"~/.ssh"`. On Windows, this may be problematic. When we type `path.expand("~")`, we get `"C:/Users/username/Documents"`. This means that `git2r::cred_ssh_key()` looks for our keys in `"C:/Users/username/Documents/.ssh"`; they aren't there!
 
 ### Workaround
 
-We solved this problem by creating a symbolic directoy-link so that we need keep only one set of keys. Following the Windows "Start" button, we opened the command line, using "Run as administrator".
+We solved this problem by creating a symbolic directory-link so that we need keep only one set of keys. Following the Windows "Start" button, we opened the command line, using "Run as administrator".
 
 ![](img/workaround_keys_cmd.png)
 
