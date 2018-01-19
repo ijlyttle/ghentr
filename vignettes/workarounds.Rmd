@@ -69,13 +69,11 @@ Error in .local(object, ...) :
 
 ### Workaround
  
-If `use_github()` cannot use the ssh-agent, we can supply the credentials argument:
+Luckily, there is an alternative: if `use_github()` cannot use the ssh-agent, we can supply the credentials argument:
 
 ```R
 use_github(credentials = git2r::cred_ssh_key())
 ```
- 
-Luckily, there is an alternative, the `credentials` argument and the function `git2r::cred_ssh_key()`. 
 
 ### Glitch
 

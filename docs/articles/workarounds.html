@@ -138,9 +138,8 @@ Error in .local(object, ...) :
 <div id="workaround" class="section level3">
 <h3 class="hasAnchor">
 <a href="#workaround" class="anchor"></a>Workaround</h3>
-<p>If <code>use_github()</code> cannot use the ssh-agent, we can supply the credentials argument:</p>
+<p>Luckily, there is an alternative: if <code>use_github()</code> cannot use the ssh-agent, we can supply the credentials argument:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">use_github</span>(<span class="dt">credentials =</span> git2r<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">cred_ssh_key</a></span>())</code></pre></div>
-<p>Luckily, there is an alternative, the <code>credentials</code> argument and the function <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code>.</p>
 </div>
 <div id="glitch-2" class="section level3">
 <h3 class="hasAnchor">
@@ -196,7 +195,7 @@ Error in .local(object, ...) :
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 
       </footer>
