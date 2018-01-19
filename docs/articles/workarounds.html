@@ -167,7 +167,7 @@ Error in .local(object, ...) :
 <div id="workaround-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#workaround-2" class="anchor"></a>Workaround</h3>
-<p>If the package <strong>getPass</strong>, is installed then <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> will launch a popup where you can enter your (obscured) passphrase.</p>
+<p>If the package <strong>getPass</strong> is installed, then <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> will launch a popup where you can enter your (obscured) passphrase.</p>
 <pre><code>install.packages("getPass")</code></pre>
 <p>At this point, you should be able to use SSH keys on Windows without difficulty.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">use_github</span>(<span class="dt">credentials =</span> git2r<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">cred_ssh_key</a></span>())</code></pre></div>

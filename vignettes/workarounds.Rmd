@@ -103,7 +103,7 @@ If your key is protected by a passphrase (it is, right?), `git2r::push()` needs 
 
 ### Workaround
 
-If the package **getPass**, is installed then `git2r::push()` will launch a popup where you can enter your (obscured) passphrase. 
+If the package **getPass** is installed, then `git2r::push()` will launch a popup where you can enter your (obscured) passphrase. 
 
 ```
 install.packages("getPass")
