@@ -5,7 +5,8 @@ Authors@R: c(
   person(given = "Ian", family = "Lyttle", email = "ian.lyttle@schneider-electric.com", role = c("aut", "cre")),
   person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("ctb"), 
     comment = c(ORCID = "0000-0003-4757-117X")
-  )
+  ),
+  person("Emily", "Bosak", email = "berrye123@gmail.com", role = c("ctb"))
   )
 Description: The devtools package provides a couple of useful functions for 
  for working with GitHub: install_github(), to install packages from GitHub, 

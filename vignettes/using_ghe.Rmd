@@ -33,7 +33,7 @@ If you don't already have an institution-specific package, this is your invitati
 usethis::create_package("~/r-packages/acmetools")
 ```
 
-At this point, if you are using the RStudio IDE, a new RStudio project will open. Your subsquent work will be in this newly-created project.
+At this point, if you are using the RStudio IDE, a new RStudio project will open. Your subsequent work will be in this newly-created project.
 
 ### Create functions
 
@@ -97,7 +97,7 @@ devtools::install_github("<your-account-here>/acmetools", host = "github.acme-co
 
 Once they have **acmetools**, they can use `acmetools::install_github_acme()` instead.
 
-Alternatively, you could set up a CRAN-like repository using the **drat** package, then deploy it to be served from Acme's GHE. Then, with a strightforward modification to your (or any of your Acme colleages') `.Rprofile`, you could use `install.packages("acmetools")`. This is the subject of this package's [repository vignette](using_repository.html).  
+Alternatively, you could set up a CRAN-like repository using the **drat** package, then deploy it to be served from Acme's GHE. Then, with a straightforward modification to your (or any of your Acme colleagues') `.Rprofile`, you could use `install.packages("acmetools")`. This is the subject of this package's [repository vignette](using_repository.html).  
 
 ## Behind the scenes
 

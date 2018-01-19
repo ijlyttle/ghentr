@@ -19,7 +19,7 @@ Continuing the use-case of the [GitHub Enterprise vignette](using_ghe.html), let
 
 ![](img/drat_motivation.png)
 
-Let's assume that your CRAN-like repository is named ACMERAN. Once you have established your repository and populated it with packages, anyone within your firewall can `install.packages()` from the repository by adding a line to their `.Rprofile` file. As the adminstrator, you will need to determine your particular URL and publicize it:
+Let's assume that your CRAN-like repository is named ACMERAN. Once you have established your repository and populated it with packages, anyone within your firewall can `install.packages()` from the repository by adding a line to their `.Rprofile` file. As the administrator, you will need to determine your particular URL and publicize it:
 
 ```{r}
 options(
@@ -35,7 +35,7 @@ The remainder of this vignette focuses on how to create and populate a CRAN-like
 
 ## Usage
 
-For a fuller treatment of this material, please read this **drat** [vignette for package authors](https://cran.r-project.org/web/packages/drat/vignettes/DratForPackageAuthors.html). The original purpose of **drat** was to make personal repositories publically available on `github.com`. 
+For a fuller treatment of this material, please read this **drat** [vignette for package authors](https://cran.r-project.org/web/packages/drat/vignettes/DratForPackageAuthors.html). The original purpose of **drat** was to make personal repositories publicly available on `github.com`. 
 For private use within an institution, I recommend a slightly different approach, hence this vignette. 
 
 ### Creating a repository
@@ -65,7 +65,7 @@ options(
 )
 ```
 
-As the ACMERAN adminstrator, it is useful for you to set your `dratRepo` option; this makes it easier for you to add a package to your repository, as **drat** will know where to look.
+As the ACMERAN administrator, it is useful for you to set your `dratRepo` option; this makes it easier for you to add a package to your repository, as **drat** will know where to look.
 
 Next, you should create a git repository for your project. Here is where I suggest doing something differently from what **drat** suggests. If you were to use the `drat::initRepo()` function, it would create a git repository and a `gh-pages` branch. I suggest that you use the `master` branch because it will require you to act explicitly to share the git repository as a web-site; more on this later.
 
@@ -89,9 +89,9 @@ At this point, you have a fully-functioning CRAN-like repository. You can public
 
 Let's say you have a package called **boomerang**, and it is ready to add to the ACMERAN repository. We will assume that the package-project for **boomerang** is on your computer (having cloned it, if needed), and that your `option("dratRepo")` is set properly. 
 
-Start by opening the **boomerang** project in your RStudio IDE, ensuring your working directory is the project's root direcory.
+Start by opening the **boomerang** project in your RStudio IDE, ensuring your working directory is the project's root directory.
 
-In a package's `DESCRIPTION` file, there may a field called `Repository`. You may not have noticed it before now because it is added by the CRAN mainatiners. This field is needed by **packrat** or **rsconnect**, so that they know where to find the source for a particular package. As the adminstrator for ACMERAN, this is your job to make sure this field is correct for all the packages added to ACMERAN. 
+In a package's `DESCRIPTION` file, there may a field called `Repository`. You may not have noticed it before now because it is added by the CRAN maintainers. This field is needed by **packrat** or **rsconnect**, so that they know where to find the source for a particular package. As the administrator for ACMERAN, this is your job to make sure this field is correct for all the packages added to ACMERAN. 
 
 The **ghentr** package offers a couple of functions to set the `Repository` field in your new package's `DESCRIPTION`. For ACMERAN, if `getOption("dratRepo")` is set, and its `basename()` is `"ACMERAN"` or `"acmeran"`, then you can use the `use_drat_repo()` function. If not, you can use the `use_repo()` function.
 
@@ -107,7 +107,7 @@ From the somewhere in the package directory for **boomerang**, you can run:
 # yes - name is equivalent
 ghentr::use_drat_repo()
 
-# no - name is not eqivalent
+# no - name is not equivalent
 ghentr::use_repo("ACMERAN")
 ```
 
@@ -153,13 +153,13 @@ When you commit and push your ACMERAN project to Acme's GHE, the **boomerang** p
 
 ### Source repository
 
-One note, in my experience it may occasionally be necessary to install packages using the `type` option, `install.packages("boomerang", type = "source")`. As **drat** explains, its purpose is to help you create a source repository, as opposed to a binary repository. As a result, if you add pacakages to ACMERAN that require compilation, either you will have to add the binaries yourself, or let your users know that they will need the appropriate compilation-environment, e.g. [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows.
+One note, in my experience it may occasionally be necessary to install packages using the `type` option, `install.packages("boomerang", type = "source")`. As **drat** explains, its purpose is to help you create a source repository, as opposed to a binary repository. As a result, if you add packages to ACMERAN that require compilation, either you will have to add the binaries yourself, or let your users know that they will need the appropriate compilation-environment, e.g. [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows.
 
 If you want to provide binaries, this is possible, but this goes beyond the scope of **ghentr** and **drat**.
 
 ### Using repository externally
 
-Within your institution, you may want to install packages from your private repository, ACMERAN, on a virtual machine (or other such computer) outside your firewall. This section will walk you through how to do that from a technical point-of-view. Of course, you should check with your management to see if this solution is permissable as a matter of policy.
+Within your institution, you may want to install packages from your private repository, ACMERAN, on a virtual machine (or other such computer) outside your firewall. This section will walk you through how to do that from a technical point-of-view. Of course, you should check with your management to see if this solution is permissible as a matter of policy.
 
 ![](img/drat_external_motivation.png)
 

@@ -84,7 +84,7 @@
     
     
 <div class="contents">
-<p>In the initial shakedown of this package, my colleage Emily Bosak and I found some glitches.</p>
+<p>In the initial shakedown of this package, my colleague Emily Bosak and I found some glitches.</p>
 <div id="too-many-repos" class="section level2">
 <h2 class="hasAnchor">
 <a href="#too-many-repos" class="anchor"></a>Too many repos</h2>
@@ -124,7 +124,7 @@ Error: Command failed (1)</code></pre>
 <a href="#glitch-1" class="anchor"></a>Glitch</h3>
 <p>This is an issue we have seen on Windows 7 - we were not able to test on any other versions of Windows so this may or may not be the case in Windows 10.</p>
 <p>This appears when using <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code> or local variation of it, using SSH for the git remotes.</p>
-<p>One of the functions that <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code> relies on is <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> - the <code>credentials</code> argument to <code>use_github()</code> is passed to <code>push()</code>. If its value is <code>NULL</code> (the default), then <code>push()</code> will pass the request for credentials to an ssh-agent. I find that this works will on Mac, but I am having trouble to establish an ssh-agent on Windows that can make itself known to <strong>git2r</strong>.</p>
+<p>One of the functions that <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code> relies on is <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> - the <code>credentials</code> argument to <code>use_github()</code> is passed to <code>push()</code>. If its value is <code>NULL</code> (the default), then <code>push()</code> will pass the request for credentials to an ssh-agent. I find that this works well on Mac, but I am having trouble to establish an ssh-agent on Windows that can make itself known to <strong>git2r</strong>.</p>
 <p>Thus, when we tried this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">use_github</span>()</code></pre></div>
 <p>We got this:</p>
@@ -146,12 +146,12 @@ Error in .local(object, ...) :
 <h3 class="hasAnchor">
 <a href="#glitch-2" class="anchor"></a>Glitch</h3>
 <p>If you created your keys using the RStudio IDE, it will put them in <code>"C:/Users/username/.ssh"</code>.</p>
-<p>The function <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code> looks for your keys in the diectory <code>"~/.ssh"</code>. On Windows, this may be problematic. When we type <code>path.expand("~")</code>, we get <code>"C:/Users/username/Documents"</code>. This means that <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code> looks for our keys in <code>"C:/Users/username/Documents/.ssh"</code>; they aren’t there!</p>
+<p>The function <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code> looks for your keys in the directory <code>"~/.ssh"</code>. On Windows, this may be problematic. When we type <code>path.expand("~")</code>, we get <code>"C:/Users/username/Documents"</code>. This means that <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code> looks for our keys in <code>"C:/Users/username/Documents/.ssh"</code>; they aren’t there!</p>
 </div>
 <div id="workaround-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#workaround-1" class="anchor"></a>Workaround</h3>
-<p>We solved this problem by creating a symbolic directoy-link so that we need keep only one set of keys. Following the Windows “Start” button, we opened the command line, using “Run as administrator”.</p>
+<p>We solved this problem by creating a symbolic directory-link so that we need keep only one set of keys. Following the Windows “Start” button, we opened the command line, using “Run as administrator”.</p>
 <div class="figure">
 <img src="img/workaround_keys_cmd.png">
 </div>
@@ -196,7 +196,7 @@ Error in .local(object, ...) :
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
