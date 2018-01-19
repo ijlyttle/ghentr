@@ -165,3 +165,7 @@ github_acme_pat <- function(quiet = FALSE) {
 }
 ```
 
+## Windows 7 and SSH
+
+We found it difficult to use Windows 7 with SSH - this would be applicable to `usethis::use_github()` as well as `acmetools::use_github_acme()`. It is possible that this problem is confined to our particular corporate load of Windows. Anyhow, we wrote up our set of [workarounds](https://ijlyttle.github.io/ghentr/articles/workarounds.html#windows-7-and-ssh).
+

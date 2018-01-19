@@ -78,7 +78,7 @@
       <h1>Using a CRAN-like Repository</h1>
                         <h4 class="author">Ian Lyttle</h4>
             
-            <h4 class="date">2018-01-18</h4>
+            <h4 class="date">2018-01-19</h4>
           </div>
 
     
@@ -121,6 +121,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/use_git">use_git</a></span>()</code></pre></div>
 <p>To put this repository onto your (Acme’s) instance of GHE, you can use your <code>acmetools::use_github_acme()</code> function, as described in the <a href="using_ghe.html">using GitHub Enterprise vignette</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acmetools<span class="op">::</span><span class="kw">use_github_acme</span>()</code></pre></div>
+<p>If you have problems with Windows and SSH-authentication for your git remotes, you may find this set of <a href="https://ijlyttle.github.io/ghentr/articles/workarounds.html#windows-7-and-ssh">workaround</a> useful.</p>
 <p>Finally, go to your repository’s page at your GHE website, go to its “Settings” tab, and activate “GitHub Pages” on the master branch.</p>
 <p>At this point, you have a fully-functioning CRAN-like repository. You can publicize the URL to your colleagues to add to their <code>options("repos")</code>. However, for the repository to be useful it needs packages.</p>
 </div>
@@ -144,6 +145,18 @@ ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
 <p>Next, check and build the package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/check">check</a></span>() 
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/build">build</a></span>()</code></pre></div>
+<p>If you get an error that looks like this:</p>
+<pre><code>'/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file --no-environ --no-save --no-restore  \
+  --quiet CMD build '/Users/acmeuser/Documents/git/boomerang' --no-resave-data  \
+  --no-manual 
+
+Error: 4:3: unexpected symbol
+3: "https://pages.github.acme.com/ACMERAN/"
+4:   ...
+     ^
+Execution halted
+Error: Command failed (1)</code></pre>
+<p>To get around this, either use the development version of <strong>devtools</strong>, or use the RStudio IDE dropdowns for Check and Build, as described in this <a href="https://ijlyttle.github.io/ghentr/articles/workarounds.html#too-many-repos">workaround</a>.</p>
 <p>The <code>build()</code> function, if successful, returns a string describing the path to package file:</p>
 <pre><code>[1] "path/to/boomerang.tar.gz"</code></pre>
 <p>Now that you have this file, you can use <strong>drat</strong> to add it to your repository. The function <code><a href="http://www.rdocumentation.org/packages/drat/topics/insertPackage">drat::insertPackage()</a></code> uses <code>getOption("dratRepo")</code> as its default location for the drat repository.</p>

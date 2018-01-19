@@ -11,7 +11,7 @@ In the initial shakedown of this package, my colleage Emily Bosak and I found so
 
 ### Glitch
 
-This has already been brought to the [attention of the devtools team](https://github.com/hadley/devtools/issues/1695), but it seems that if your collection of repositories is too long, `devtools::build()` runs into a problem. The error looks like this:
+If you are using **devtools** 1.13.4, and if your collection of repositories is too long, `devtools::build()` runs into a problem. The error looks like this:
 
 ```
 '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file --no-environ --no-save --no-restore  \
@@ -26,7 +26,9 @@ Execution halted
 Error: Command failed (1)
 ```
 
-### Workaround
+### Workarounds
+
+As suggested in the response to this [issue](https://github.com/hadley/devtools/issues/1695), if you use `pkgbuild::build()`, used in the development version of **devtools** (as of early 2018), this problem goes away.
 
 Another way to build the source package is to follow the "Build" > "More"  > "Build Source Package" sequence in the RStudio IDE: 
 

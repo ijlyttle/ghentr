@@ -79,6 +79,8 @@ To put this repository onto your (Acme's) instance of GHE, you can use your `acm
 acmetools::use_github_acme()
 ```
 
+If you have problems with Windows and SSH-authentication for your git remotes, you may find this set of [workaround](https://ijlyttle.github.io/ghentr/articles/workarounds.html#windows-7-and-ssh) useful.
+
 Finally, go to your repository's page at your GHE website, go to its "Settings" tab, and activate "GitHub Pages" on the master branch.
 
 At this point, you have a fully-functioning CRAN-like repository. You can publicize the URL to your colleagues to add to their `options("repos")`. However, for the repository to be useful it needs packages.
@@ -117,6 +119,23 @@ Next, check and build the package:
 devtools::check() 
 devtools::build()
 ```
+
+If you get an error that looks like this:
+
+```
+'/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file --no-environ --no-save --no-restore  \
+  --quiet CMD build '/Users/acmeuser/Documents/git/boomerang' --no-resave-data  \
+  --no-manual 
+
+Error: 4:3: unexpected symbol
+3: "https://pages.github.acme.com/ACMERAN/"
+4:   ...
+     ^
+Execution halted
+Error: Command failed (1)
+```
+
+To get around this, either use the development version of **devtools**, or use the RStudio IDE dropdowns for Check and Build, as described in this [workaround](https://ijlyttle.github.io/ghentr/articles/workarounds.html#too-many-repos).
 
 The `build()` function, if successful, returns a string describing the path to package file:
 

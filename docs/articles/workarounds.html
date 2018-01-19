@@ -78,7 +78,7 @@
       <h1>Workarounds</h1>
                         <h4 class="author">Ian Lyttle</h4>
             
-            <h4 class="date">2018-01-18</h4>
+            <h4 class="date">2018-01-19</h4>
           </div>
 
     
@@ -91,7 +91,7 @@
 <div id="glitch" class="section level3">
 <h3 class="hasAnchor">
 <a href="#glitch" class="anchor"></a>Glitch</h3>
-<p>This has already been brought to the <a href="https://github.com/hadley/devtools/issues/1695">attention of the devtools team</a>, but it seems that if your collection of repositories is too long, <code><a href="http://www.rdocumentation.org/packages/devtools/topics/build">devtools::build()</a></code> runs into a problem. The error looks like this:</p>
+<p>If you are using <strong>devtools</strong> 1.13.4, and if your collection of repositories is too long, <code><a href="http://www.rdocumentation.org/packages/devtools/topics/build">devtools::build()</a></code> runs into a problem. The error looks like this:</p>
 <pre><code>'/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file --no-environ --no-save --no-restore  \
   --quiet CMD build '/Users/ijlyttle/Documents/git/github/public_me/ghentr' --no-resave-data  \
   --no-manual 
@@ -103,9 +103,10 @@ Error: 4:3: unexpected symbol
 Execution halted
 Error: Command failed (1)</code></pre>
 </div>
-<div id="workaround" class="section level3">
+<div id="workarounds" class="section level3">
 <h3 class="hasAnchor">
-<a href="#workaround" class="anchor"></a>Workaround</h3>
+<a href="#workarounds" class="anchor"></a>Workarounds</h3>
+<p>As suggested in the response to this <a href="https://github.com/hadley/devtools/issues/1695">issue</a>, if you use <code><a href="http://www.rdocumentation.org/packages/pkgbuild/topics/build">pkgbuild::build()</a></code>, used in the development version of <strong>devtools</strong> (as of early 2018), this problem goes away.</p>
 <p>Another way to build the source package is to follow the “Build” &gt; “More” &gt; “Build Source Package” sequence in the RStudio IDE:</p>
 <div class="figure">
 <img src="img/workaround_repos.png">
@@ -134,9 +135,9 @@ Error: Command failed (1)</code></pre>
 Error in .local(object, ...) : 
   Error in 'git2r_push': error authenticating: failed connecting agent</code></pre>
 </div>
-<div id="workaround-1" class="section level3">
+<div id="workaround" class="section level3">
 <h3 class="hasAnchor">
-<a href="#workaround-1" class="anchor"></a>Workaround</h3>
+<a href="#workaround" class="anchor"></a>Workaround</h3>
 <p>If <code>use_github()</code> cannot use the ssh-agent, we can supply the credentials argument:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">use_github</span>(<span class="dt">credentials =</span> git2r<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">cred_ssh_key</a></span>())</code></pre></div>
 <p>Luckily, there is an alternative, the <code>credentials</code> argument and the function <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code>.</p>
@@ -147,9 +148,9 @@ Error in .local(object, ...) :
 <p>If you created your keys using the RStudio IDE, it will put them in <code>"C:/Users/username/.ssh"</code>.</p>
 <p>The function <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code> looks for your keys in the diectory <code>"~/.ssh"</code>. On Windows, this may be problematic. When we type <code>path.expand("~")</code>, we get <code>"C:/Users/username/Documents"</code>. This means that <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code> looks for our keys in <code>"C:/Users/username/Documents/.ssh"</code>; they aren’t there!</p>
 </div>
-<div id="workaround-2" class="section level3">
+<div id="workaround-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#workaround-2" class="anchor"></a>Workaround</h3>
+<a href="#workaround-1" class="anchor"></a>Workaround</h3>
 <p>We solved this problem by creating a symbolic directoy-link so that we need keep only one set of keys. Following the Windows “Start” button, we opened the command line, using “Run as administrator”.</p>
 <div class="figure">
 <img src="img/workaround_keys_cmd.png">
@@ -164,9 +165,9 @@ Error in .local(object, ...) :
 <a href="#glitch-3" class="anchor"></a>Glitch</h3>
 <p>If your key is protected by a passphrase (it is, right?), <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> needs your help to get it.</p>
 </div>
-<div id="workaround-3" class="section level3">
+<div id="workaround-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#workaround-3" class="anchor"></a>Workaround</h3>
+<a href="#workaround-2" class="anchor"></a>Workaround</h3>
 <p>If the package <strong>getPass</strong>, is installed then <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> will launch a popup where you can enter your (obscured) passphrase.</p>
 <pre><code>install.packages("getPass")</code></pre>
 <p>At this point, you should be able to use SSH keys on Windows without difficulty.</p>
