@@ -1,3 +1,6 @@
+# note - this template is not active because it would introduce
+# a lot of ::: into other packages
+
 #' Adds Repository field to DESCRIPTION
 #'
 #' This function helps you add a repository field to a package DESCRIPTION file.
@@ -92,12 +95,10 @@ init_drat_repo_{{suffix}} <- function() {
 
   usethis:::todo("Add the following element to options() in your .Rprofile file:")
   usethis:::code_block(paste0("dratRepo = \"", path, "\""))
-  usethis:::todo(
-    "Create a git repository using usethis::use_git()",
-    "Establish remote using {{package_name}}::use_github_{{suffix}}()",
-    "At {{name}}'s GitHub instance, activate GitHub pages on the master branch.",
-    "Publicize repository's URL for your colleagues to add to options() in .Rprofile."
-  )
+  usethis:::todo("Create a git repository using usethis::use_git()")
+  usethis:::todo("Establish remote using {{package_name}}::use_github_{{suffix}}()")
+  usethis:::todo("At {{name}}'s GitHub instance, activate GitHub pages on the master branch.")
+  usethis:::todo("Publicize repository's URL for your colleagues to add to options() in .Rprofile.")
 
   invisible(NULL)
 }

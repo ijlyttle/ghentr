@@ -94,12 +94,10 @@ init_drat_repo <- function() {
   # TODO: keep eye on todo(), code_block() export
   todo("Add the following element to options() in your .Rprofile file:")
   code_block(paste0("dratRepo = \"", path, "\""))
-  todo(
-    "Create a git repository using usethis::use_git()",
-    "Establish remote using your institutions particular use_github()",
-    "At your institution's GitHub instance, activate GitHub pages on master branch.",
-    "Publicize repository's URL for your colleagues to add to options() in .Rprofile."
-  )
+  todo("Create a git repository using usethis::use_git()")
+  todo("Establish remote using your institution's particular use_github()")
+  todo("At your institution's GitHub instance, activate GitHub pages on master branch.")
+  todo("Publicize repository's URL for your colleagues to add to options() in .Rprofile.")
 
   invisible(NULL)
 }
