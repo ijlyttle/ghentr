@@ -81,9 +81,9 @@ If you created your keys using the RStudio IDE, it will put them in `"C:/Users/u
 
 The function `git2r::cred_ssh_key()` looks for your keys in the directory `"~/.ssh"`. On Windows, this may be problematic. When we type `path.expand("~")`, we get `"C:/Users/username/Documents"`. This means that `git2r::cred_ssh_key()` looks for our keys in `"C:/Users/username/Documents/.ssh"`; they aren't there!
 
-### Workaround
+### Workarounds
 
-We solved this problem by creating a symbolic directory-link so that we need keep only one set of keys. Following the Windows "Start" button, we opened the command line, using "Run as administrator".
+One solution is to create a symbolic directory-link so that we need keep only one set of keys. Following the Windows "Start" button, we opened the command line, using "Run as administrator".
 
 ![](img/workaround_keys_cmd.png)
 

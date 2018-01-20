@@ -147,10 +147,10 @@ Error in .local(object, ...) :
 <p>If you created your keys using the RStudio IDE, it will put them in <code>"C:/Users/username/.ssh"</code>.</p>
 <p>The function <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code> looks for your keys in the directory <code>"~/.ssh"</code>. On Windows, this may be problematic. When we type <code>path.expand("~")</code>, we get <code>"C:/Users/username/Documents"</code>. This means that <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code> looks for our keys in <code>"C:/Users/username/Documents/.ssh"</code>; they aren’t there!</p>
 </div>
-<div id="workaround-1" class="section level3">
+<div id="workarounds-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#workaround-1" class="anchor"></a>Workaround</h3>
-<p>We solved this problem by creating a symbolic directory-link so that we need keep only one set of keys. Following the Windows “Start” button, we opened the command line, using “Run as administrator”.</p>
+<a href="#workarounds-1" class="anchor"></a>Workarounds</h3>
+<p>One solution is to create a symbolic directory-link so that we need keep only one set of keys. Following the Windows “Start” button, we opened the command line, using “Run as administrator”.</p>
 <div class="figure">
 <img src="img/workaround_keys_cmd.png">
 </div>
@@ -172,9 +172,9 @@ Error in .local(object, ...) :
 <a href="#glitch-3" class="anchor"></a>Glitch</h3>
 <p>If your key is protected by a passphrase (it is, right?), <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> needs your help to get it.</p>
 </div>
-<div id="workaround-2" class="section level3">
+<div id="workaround-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#workaround-2" class="anchor"></a>Workaround</h3>
+<a href="#workaround-1" class="anchor"></a>Workaround</h3>
 <p>If the package <strong>getPass</strong> is installed, then <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> will launch a popup where you can enter your (obscured) passphrase.</p>
 <pre><code>install.packages("getPass")</code></pre>
 <p>At this point, you should be able to use SSH keys on Windows without difficulty.</p>
