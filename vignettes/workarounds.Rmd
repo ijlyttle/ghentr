@@ -38,13 +38,13 @@ Another way to build the source package is to follow the "Build" > "More"  > "Bu
 
 At the end of the process, the string you need for `drat::insertPackage()` will be printed to that window.
 
-## Windows 7 and SSH
+## Windows and SSH
 
 Frustratingly, this glitch can be as many as three separate glitches.
 
 ### Glitch
 
-This is an issue we have seen on Windows 7 - we were not able to test on any other versions of Windows so this may or may not be the case in Windows 10.
+This is an issue we have seen on Windows - our initial investigation confirmed this for Windows 7. Jenny Bryan (thanks!) [confirmed this](https://github.com/jennybc/happy-git-with-r/issues/74#issuecomment-359111965) for Windows 10.
 
 This appears when using `usethis::use_github()` or local variation of it, using SSH for the git remotes.
 
@@ -95,7 +95,19 @@ At this Windows command line, we created the symbolic directory-link:
 MKLINK /D "C:\Users\username\Documents\.ssh" "C:\Users\username\.ssh"
 ```
 
-Now `git2r::push()` can find your keys.
+Jenny Bryan, at ["Happy Git with R"](http://happygitwithr.com/ssh-keys.html), proposed another solution to tell `git2r::cred_ssh_key()` where to find your `.ssh` directory:
+
+```R
+cred <- 
+  git2r::cred_ssh_key(
+    publickey = "~/../.ssh/id_rsa.pub", 
+    privatekey = "~/../.ssh/id_rsa"
+  )
+
+use_github(credentials = cred)
+```
+
+Either way, `git2r::push()` can find your keys.
 
 ### Glitch
 

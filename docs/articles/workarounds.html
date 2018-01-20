@@ -78,7 +78,7 @@
       <h1>Workarounds</h1>
                         <h4 class="author">Ian Lyttle</h4>
             
-            <h4 class="date">2018-01-19</h4>
+            <h4 class="date">2018-01-20</h4>
           </div>
 
     
@@ -115,14 +115,14 @@ Error: Command failed (1)</code></pre>
 <p>At the end of the process, the string you need for <code><a href="http://www.rdocumentation.org/packages/drat/topics/insertPackage">drat::insertPackage()</a></code> will be printed to that window.</p>
 </div>
 </div>
-<div id="windows-7-and-ssh" class="section level2">
+<div id="windows-and-ssh" class="section level2">
 <h2 class="hasAnchor">
-<a href="#windows-7-and-ssh" class="anchor"></a>Windows 7 and SSH</h2>
+<a href="#windows-and-ssh" class="anchor"></a>Windows and SSH</h2>
 <p>Frustratingly, this glitch can be as many as three separate glitches.</p>
 <div id="glitch-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#glitch-1" class="anchor"></a>Glitch</h3>
-<p>This is an issue we have seen on Windows 7 - we were not able to test on any other versions of Windows so this may or may not be the case in Windows 10.</p>
+<p>This is an issue we have seen on Windows - our initial investigation confirmed this for Windows 7. Jenny Bryan (thanks!) <a href="https://github.com/jennybc/happy-git-with-r/issues/74#issuecomment-359111965">confirmed this</a> for Windows 10.</p>
 <p>This appears when using <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code> or local variation of it, using SSH for the git remotes.</p>
 <p>One of the functions that <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code> relies on is <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> - the <code>credentials</code> argument to <code>use_github()</code> is passed to <code>push()</code>. If its value is <code>NULL</code> (the default), then <code>push()</code> will pass the request for credentials to an ssh-agent. I find that this works well on Mac, but I am having trouble to establish an ssh-agent on Windows that can make itself known to <strong>git2r</strong>.</p>
 <p>Thus, when we tried this:</p>
@@ -157,7 +157,15 @@ Error in .local(object, ...) :
 <p><br></p>
 <p>At this Windows command line, we created the symbolic directory-link:</p>
 <pre><code>MKLINK /D "C:\Users\username\Documents\.ssh" "C:\Users\username\.ssh"</code></pre>
-<p>Now <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> can find your keys.</p>
+<p>Jenny Bryan, at <a href="http://happygitwithr.com/ssh-keys.html">“Happy Git with R”</a>, proposed another solution to tell <code><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">git2r::cred_ssh_key()</a></code> where to find your <code>.ssh</code> directory:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cred &lt;-<span class="st"> </span>
+<span class="st">  </span>git2r<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/git2r/topics/cred_ssh_key">cred_ssh_key</a></span>(
+    <span class="dt">publickey =</span> <span class="st">"~/../.ssh/id_rsa.pub"</span>, 
+    <span class="dt">privatekey =</span> <span class="st">"~/../.ssh/id_rsa"</span>
+  )
+
+<span class="kw">use_github</span>(<span class="dt">credentials =</span> cred)</code></pre></div>
+<p>Either way, <code><a href="http://www.rdocumentation.org/packages/git2r/topics/push-methods">git2r::push()</a></code> can find your keys.</p>
 </div>
 <div id="glitch-3" class="section level3">
 <h3 class="hasAnchor">
@@ -182,7 +190,7 @@ Error in .local(object, ...) :
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#too-many-repos">Too many repos</a></li>
-      <li><a href="#windows-7-and-ssh">Windows 7 and SSH</a></li>
+      <li><a href="#windows-and-ssh">Windows and SSH</a></li>
       </ul>
 </div>
       </div>
