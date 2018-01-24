@@ -101,3 +101,66 @@ init_drat_repo <- function() {
 
   invisible(NULL)
 }
+
+
+#' Make binary placeholders for a drat repository
+#'
+#' The goal of drat is to let you create a source repository. Supporting
+#' the inclusion of binary packages is beyond the scope of these tools.
+#' However, if you do not have the directory structure for binaries,
+#' you will get some annoying warnings each time you install packages.
+#' This function will help you get rid of those messages.
+#'
+#'
+#' @examples
+#'   make_drat_bin_placeholders()
+#' @export
+make_drat_bin_placeholders <- function() {
+
+  os_paths <- c(
+    "windows",
+    "macosx/mavericks",
+    "macosx/el-capitan"
+  )
+
+  r_versions <- c("3.1", "3.2", "3.3", "3.4")
+
+  path_root <- usethis::proj_get()
+
+  fn_path <- function(x, y){
+    file.path("bin", x, "contrib", y, "PACKAGES")
+  }
+
+  path_proj <- outer(os_paths, r_versions, fn_path)
+
+  # here, it would be good to have a confirmation for what is about to happen
+  path_proj <- path_proj[!file.exists(file.path(path_root, path_proj))]
+
+  if (identical(length(path_proj), 0L)) {
+    cat("all binary paths exist")
+    return(invisible(NULL))
+  }
+
+  x <- c(
+    "These placeholder-files will be created relative to project-root:",
+    paste(" ", value(path_root, "/")),
+    paste(" ", clisymbols::symbol$pointer, value(path_proj)),
+    "",
+    "Proceed?"
+  )
+
+  x <- paste(x, collapse = "\n")
+
+  create_placeholder <- function(file) {
+
+    usethis::use_directory(dirname(file))
+    writeLines("", con = file)
+    done("Writing placeholder-file:", value(file))
+  }
+
+  if (identical(ask_user(x), TRUE)) {
+    lapply(path_proj, create_placeholder)
+  }
+
+  invisible(NULL)
+}

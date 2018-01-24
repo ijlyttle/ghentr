@@ -83,3 +83,30 @@ use_description_field <- function(name,
   invisible()
 }
 
+## returns TRUE if user selects answer corresponding to `true_for`
+## returns FALSE if user selects other answer or enters 0
+## errors in non-interactive() session
+## it is caller's responsibility to avoid that
+ask_user <- function(...,
+                     true_for = c("yes", "no")) {
+  true_for <- match.arg(true_for)
+  yes <- true_for == "yes"
+
+  message <- paste0(..., collapse = "")
+  if (!interactive()) {
+    stop(
+      "User input required in non-interactive session.\n",
+      "Query: ", message, call. = FALSE
+    )
+  }
+
+  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "I agree", "Absolutely")
+  nos <- c("No way", "Not now", "Negative", "No", "Nope", "Hell no")
+
+  qs <- c(sample(yeses, 1), sample(nos, 2))
+  rand <- sample(length(qs))
+  ret <- if(yes) rand == 1 else rand != 1
+
+  cat(message)
+  ret[utils::menu(qs[rand])]
+}
