@@ -9,10 +9,18 @@ make_drat_bin_placeholders()
 \description{
 The goal of drat is to let you create a source repository. Supporting
 the inclusion of binary packages is beyond the scope of these tools.
-However, if you do not have the directory structure for binaries,
-you will get some annoying warnings each time you install packages.
-This function will help you get rid of those messages.
+However, if your drat repository does not have the directory structure
+for binaries, you will get some annoying warnings each time
+you install packages. This function can help you get rid of those messages.
+}
+\details{
+In a CRAN-like repository, binary packages are kept in their own directory
+structure. This function looks in your project to see what parts of this
+directory structure exist. It creates those parts of the structure that
+do not already exist; but nothing is overwritten.
 }
 \examples{
+\dontrun{
   make_drat_bin_placeholders()
+}
 }

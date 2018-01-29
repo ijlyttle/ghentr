@@ -107,13 +107,19 @@ init_drat_repo <- function() {
 #'
 #' The goal of drat is to let you create a source repository. Supporting
 #' the inclusion of binary packages is beyond the scope of these tools.
-#' However, if you do not have the directory structure for binaries,
-#' you will get some annoying warnings each time you install packages.
-#' This function will help you get rid of those messages.
+#' However, if your drat repository does not have the directory structure
+#' for binaries, you will get some annoying warnings each time
+#' you install packages. This function can help you get rid of those messages.
 #'
+#' In a CRAN-like repository, binary packages are kept in their own directory
+#' structure. This function looks in your project to see what parts of this
+#' directory structure exist. It creates those parts of the structure that
+#' do not already exist; but nothing is overwritten.
 #'
 #' @examples
+#' \dontrun{
 #'   make_drat_bin_placeholders()
+#' }
 #' @export
 make_drat_bin_placeholders <- function() {
 
@@ -133,18 +139,18 @@ make_drat_bin_placeholders <- function() {
 
   path_proj <- outer(os_paths, r_versions, fn_path)
 
-  # here, it would be good to have a confirmation for what is about to happen
+  # keep only those paths that no not yet exist
   path_proj <- path_proj[!file.exists(file.path(path_root, path_proj))]
 
   if (identical(length(path_proj), 0L)) {
-    cat("all binary paths exist")
+    cat("No action needed - all binary paths exist")
     return(invisible(NULL))
   }
 
   x <- c(
     "These placeholder-files will be created relative to project-root:",
     paste(" ", value(path_root, "/")),
-    paste(" ", clisymbols::symbol$pointer, value(path_proj)),
+    paste(" ", clisymbols::symbol$bullet, value(path_proj)),
     "",
     "Proceed?"
   )
