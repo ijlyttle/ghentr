@@ -8,3 +8,4 @@
 ^docs$
 ^_pkgdown\.yml$
 ^vignettes/glitches\.Rmd$
+^presentation$
