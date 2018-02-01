@@ -78,6 +78,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -104,40 +107,32 @@
     
     <p>The goal of drat is to let you create a source repository. Supporting
 the inclusion of binary packages is beyond the scope of these tools.
-However, if you do not have the directory structure for binaries,
-you will get some annoying warnings each time you install packages.
-This function will help you get rid of those messages.</p>
+However, if your drat repository does not have the directory structure
+for binaries, you will get some annoying warnings each time
+you install packages. This function can help you get rid of those messages.</p>
     
 
     <pre class="usage"><span class='fu'>make_drat_bin_placeholders</span>()</pre>
         
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>In a CRAN-like repository, binary packages are kept in their own directory
+structure. This function looks in your project to see what parts of this
+directory structure exist. It creates those parts of the structure that
+do not already exist; but nothing is overwritten.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='fu'>make_drat_bin_placeholders</span>()</div><div class='output co'>#&gt; These placeholder-files will be created relative to project-root:
-#&gt;   '/Users/ijlyttle/Documents/git/github/public_me/ghentr/'
-#&gt;   ❯ 'bin/windows/contrib/3.1/PACKAGES'
-#&gt;   ❯ 'bin/macosx/mavericks/contrib/3.1/PACKAGES'
-#&gt;   ❯ 'bin/macosx/el-capitan/contrib/3.1/PACKAGES'
-#&gt;   ❯ 'bin/windows/contrib/3.2/PACKAGES'
-#&gt;   ❯ 'bin/macosx/mavericks/contrib/3.2/PACKAGES'
-#&gt;   ❯ 'bin/macosx/el-capitan/contrib/3.2/PACKAGES'
-#&gt;   ❯ 'bin/windows/contrib/3.3/PACKAGES'
-#&gt;   ❯ 'bin/macosx/mavericks/contrib/3.3/PACKAGES'
-#&gt;   ❯ 'bin/macosx/el-capitan/contrib/3.3/PACKAGES'
-#&gt;   ❯ 'bin/windows/contrib/3.4/PACKAGES'
-#&gt;   ❯ 'bin/macosx/mavericks/contrib/3.4/PACKAGES'
-#&gt;   ❯ 'bin/macosx/el-capitan/contrib/3.4/PACKAGES'
-#&gt; 
-#&gt; Proceed?
-#&gt; 1: Yes
-#&gt; 2: No
-#&gt; 3: Hell no
-#&gt; </div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+  <span class='fu'>make_drat_bin_placeholders</span>()
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-            
+      
+      <li><a href="#details">Details</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Adds Repository field to DESCRIPTION — use_drat_repo • ghentr</title>
+<title>All news • ghentr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -99,64 +99,32 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9 contents">
+
+  <div class="col-md-9">
     <div class="page-header">
-    <h1>Adds Repository field to DESCRIPTION</h1>
+      <h1>Change log <small>All releases</small></h1>
     </div>
 
-    
-    <p>This function helps you add a repository field to a package DESCRIPTION file.</p>
-    
-
-    <pre class="usage"><span class='fu'>use_drat_repo</span>()
-
-<span class='fu'>use_repo</span>(<span class='no'>name</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>name</th>
-      <td><p><code>character</code>, name of repository</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>invisible(NULL)</code>, called for side effect</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>For packrat and RStudioConnect deployment to work, packages in CRAN-like
-repositories must identify the name of the repository in their DESCRIPTION
-files. For CRAN, this line is added by the CRAN maintainers. If you are
-submitting a package to your institution's repository, you will need to add
-its name to your DESCRIPTION file.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-  <span class='co'># if you have a DRAT repository with the same basename</span>
-  <span class='fu'>use_drat_repo</span>()
-
-  <span class='co'># if you know the name of the repository</span>
-  <span class='fu'>use_repo</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"ACMERAN"</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
+    <div class="contents">
+    <div id="ghentr-0-0-0-9000" class="section level1">
+<h1 class="hasAnchor">
+<a href="#ghentr-0-0-0-9000" class="anchor"></a>ghentr 0.0.0.9000</h1>
+<ul>
+<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+</ul>
+</div>
+    </div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#ghentr-0-0-0-9000">0.0.0.9000</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
       <footer>
