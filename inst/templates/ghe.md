@@ -1,23 +1,23 @@
 ## Installing this package
 
-To install this package, to use  **devtools**:
+To install this package using **devtools**:
 
 ```r
 install.packages("devtools") # if not already installed
 devtools::install_github("{name}/{{package_name}}", host = "{{host}}")
 ```
 
-## Usage
+## Installing packages from {{name}}'s GitHub Enterprise
 
 For future package-installations from {{name}}'s GitHub Enterprise, 
-you can simply use `{{package_name}}::use_github_{{suffix}}("user/repo")`.
+you can simply use `{{package_name}}::install_github_{{suffix}}("user/repo")`.
 
 If you wish that **{{package_name}}** be started automatically in your interactive 
 sessions, you can modify your `.Rprofile` file, just like you would for
 [**devtools**](https://github.com/hadley/devtools#other-tips). 
 
-To access private packages on this instance of GitHub,
-Enterprise, you need a Personal Access Token (PAT)
+To access private packages on this instance of GitHub Enterprise, 
+you need a Personal Access Token (PAT)
 and to set an environment variable named GITHUB_{{suffix_upper}}_PAT.
 
 You can set the environment variable by adding a line like this to 
