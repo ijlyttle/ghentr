@@ -30,6 +30,8 @@ There are two ways **ghentr** can help you work with GitHub Enterprise:
 
 -   To initalize and manage a private CRAN-like repository using [drat](https://CRAN.R-project.org/package=drat), described in another [article](https://ijlyttle.github.io/ghentr/articles/using_repository.html).
 
+Here are the slides ([PDF](https://github.com/ijlyttle/ghentr/blob/master/presentation/rstudioconf-2018.pdf)) from a presentation given at rstudio::conf(2018).
+
 Installation
 ------------
 
