@@ -81,7 +81,7 @@
       <h1>Using GitHub Enterprise</h1>
                         <h4 class="author">Ian Lyttle</h4>
             
-            <h4 class="date">2018-02-01</h4>
+            <h4 class="date">2018-02-24</h4>
           </div>
 
     
@@ -144,7 +144,7 @@ usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumenta
 <p>To distribute the <strong>acmetools</strong> package, you can suggest that people use <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"&lt;your-account-here&gt;/acmetools"</span>, <span class="dt">host =</span> <span class="st">"github.acme-corp.com/api/v3"</span>)</code></pre></div>
-<p>Once they have <strong>acmetools</strong>, they can use <code>acmetools::install_github_acme()</code> instead.</p>
+<p>Once they have <strong>acmetools</strong>, they can use <code><a href="http://www.rdocumentation.org/packages/acmetools/topics/install_github_acme">acmetools::install_github_acme()</a></code> instead.</p>
 <p>Alternatively, you could set up a CRAN-like repository using the <strong>drat</strong> package, then deploy it to be served from Acme’s GHE. Then, with a straightforward modification to your (or any of your Acme colleagues’) <code>.Rprofile</code>, you could use <code>install.packages("acmetools")</code>. This is the subject of this package’s <a href="using_repository.html">repository vignette</a>.</p>
 </div>
 </div>
@@ -152,7 +152,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <h2 class="hasAnchor">
 <a href="#behind-the-scenes" class="anchor"></a>Behind the scenes</h2>
 <p>The functions created by <code><a href="../reference/use_github_enterprise.html">use_github_enterprise()</a></code> are wrappers to (or mimic) existing <strong>usethis</strong> and <strong>devtools</strong> functions.</p>
-<p>Here is the code for <code>acmetools::install_github_acme()</code>:</p>
+<p>Here is the code for <code><a href="http://www.rdocumentation.org/packages/acmetools/topics/install_github_acme">acmetools::install_github_acme()</a></code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">install_github_acme &lt;-<span class="st"> </span><span class="cf">function</span>(repo,
                                 <span class="dt">username =</span> <span class="ot">NULL</span>,
                                 <span class="dt">ref =</span> <span class="st">"master"</span>,
@@ -190,7 +190,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
     <span class="dt">host =</span> host
   )
 }</code></pre></div>
-<p>Finally, <code>acmetools::github_acme_pat()</code> mimics <code><a href="http://www.rdocumentation.org/packages/devtools/topics/github_pat">devtools::github_pat()</a></code>:</p>
+<p>Finally, <code><a href="http://www.rdocumentation.org/packages/acmetools/topics/github_acme_pat">acmetools::github_acme_pat()</a></code> mimics <code><a href="http://www.rdocumentation.org/packages/devtools/topics/github_pat">devtools::github_pat()</a></code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">github_acme_pat &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">quiet =</span> <span class="ot">FALSE</span>) {
 
   pat &lt;-<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">"GITHUB_ACME_PAT"</span>)
@@ -205,7 +205,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div id="windows-7-and-ssh" class="section level2">
 <h2 class="hasAnchor">
 <a href="#windows-7-and-ssh" class="anchor"></a>Windows 7 and SSH</h2>
-<p>We found it difficult to use Windows 7 with SSH - this would be applicable to <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code> as well as <code>acmetools::use_github_acme()</code>. It is possible that this problem is confined to our particular corporate load of Windows. Anyhow, we wrote up our set of <a href="https://ijlyttle.github.io/ghentr/articles/workarounds.html#windows-7-and-ssh">workarounds</a>.</p>
+<p>We found it difficult to use Windows 7 with SSH - this would be applicable to <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code> as well as <code><a href="http://www.rdocumentation.org/packages/acmetools/topics/use_github_acme">acmetools::use_github_acme()</a></code>. It is possible that this problem is confined to our particular corporate load of Windows. Anyhow, we wrote up our set of <a href="https://ijlyttle.github.io/ghentr/articles/workarounds.html#windows-7-and-ssh">workarounds</a>.</p>
 </div>
 </div>
   </div>

@@ -2,7 +2,12 @@ Package: ghentr
 Title: Templating Functions to Use with GitHub Enterprise
 Version: 0.0.0.9000
 Authors@R: c(
-  person(given = "Ian", family = "Lyttle", email = "ian.lyttle@schneider-electric.com", role = c("aut", "cre")),
+  person(
+    given = "Ian", family = "Lyttle", 
+    email = "ian.lyttle@schneider-electric.com", 
+    role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0001-9962-4849")
+  ),
   person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("ctb"), 
     comment = c(ORCID = "0000-0003-4757-117X")
   ),

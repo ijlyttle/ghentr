@@ -94,7 +94,7 @@
 <p>In time, it may become tiresome to add the host argument each time you want to install a package from GHE. Instead, it might be handy to create a function to do this for you, then put that function into a package that you can use and make available to your colleagues. This is what <strong>ghentr</strong> helps you to do.</p>
 <p>Assuming you create a package called <strong>acmetools</strong>, you can use templating functions in <strong>ghentr</strong> to add a function to <strong>acmetools</strong> that would allow you to use syntax like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wraps devtools::install_github()</span>
-acmetools<span class="op">::</span><span class="kw">install_github_acme</span>(<span class="st">"user/repo"</span>)</code></pre></div>
+acmetools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/acmetools/topics/install_github_acme">install_github_acme</a></span>(<span class="st">"user/repo"</span>)</code></pre></div>
 <p>There are two ways <strong>ghentr</strong> can help you work with GitHub Enterprise:</p>
 <ul>
 <li><p>To make functions that wrap <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code> and <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code>, described in an <a href="https://ijlyttle.github.io/ghentr/articles/using_ghe.html">article</a>.</p></li>
@@ -130,7 +130,8 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> + file <a href="LICENSE.html">LICENSE</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Ian Lyttle <br><small class="roles"> Author, maintainer </small> </li>
+<li>Ian Lyttle <br><small class="roles"> Author, maintainer </small> <br><small>(0000-0001-9962-4849)</small>
+</li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 <h2>Dev status</h2>

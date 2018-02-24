@@ -81,7 +81,7 @@
       <h1>Using a CRAN-like Repository</h1>
                         <h4 class="author">Ian Lyttle</h4>
             
-            <h4 class="date">2018-02-01</h4>
+            <h4 class="date">2018-02-24</h4>
           </div>
 
     
@@ -126,8 +126,8 @@
 <p>You will be asked to confirm the creation of the directory structure and placeholder files.</p>
 <p>Next, you should create a git repository for your project. Here is where I suggest doing something differently from what <strong>drat</strong> suggests. If you were to use the <code><a href="http://www.rdocumentation.org/packages/drat/topics/initRepo">drat::initRepo()</a></code> function, it would create a git repository and a <code>gh-pages</code> branch. I suggest that you use the <code>master</code> branch because it will require you to act explicitly to share the git repository as a web-site; more on this later.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/use_git">use_git</a></span>()</code></pre></div>
-<p>To put this repository onto your (Acme’s) instance of GHE, you can use your <code>acmetools::use_github_acme()</code> function, as described in the <a href="using_ghe.html">using GitHub Enterprise vignette</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acmetools<span class="op">::</span><span class="kw">use_github_acme</span>()</code></pre></div>
+<p>To put this repository onto your (Acme’s) instance of GHE, you can use your <code><a href="http://www.rdocumentation.org/packages/acmetools/topics/use_github_acme">acmetools::use_github_acme()</a></code> function, as described in the <a href="using_ghe.html">using GitHub Enterprise vignette</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acmetools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/acmetools/topics/use_github_acme">use_github_acme</a></span>()</code></pre></div>
 <p>If you have problems with Windows and SSH-authentication for your git remotes, you may find this set of <a href="https://ijlyttle.github.io/ghentr/articles/workarounds.html#windows-7-and-ssh">workaround</a> useful.</p>
 <p>Finally, go to your repository’s page at your GHE website, go to its “Settings” tab, and activate “GitHub Pages” on the master branch.</p>
 <p>At this point, you have a fully-functioning CRAN-like repository. You can publicize the URL to your colleagues to add to their <code>options("repos")</code>. However, for the repository to be useful it needs packages.</p>
