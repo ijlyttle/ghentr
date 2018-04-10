@@ -8,14 +8,17 @@
 <title>Using GitHub Enterprise • ghentr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Using GitHub Enterprise">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -24,8 +27,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">ghentr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">ghentr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -56,7 +63,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -76,22 +83,22 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Using GitHub Enterprise</h1>
                         <h4 class="author">Ian Lyttle</h4>
             
-            <h4 class="date">2018-02-24</h4>
-          </div>
+            <h4 class="date">2018-04-10</h4>
+      
+      <small>Source: <a href="https://github.com/ijlyttle/ghentr/blob/master/vignettes/using_ghe.Rmd"><code>vignettes/using_ghe.Rmd</code></a></small>
+
+    </div>
 
     
     
-<div class="contents">
 <p>The goal of this vignette is to show how you can use <strong>ghentr</strong> to make functions like <code>install_github()</code> for an institution-specific package to work with your instance of GitHub Enterprise.</p>
 <p>Let’s assume you work at <a href="https://en.wikipedia.org/wiki/Acme_Corporation">Acme Corporation</a> and that Acme has an instance of GitHub Enterprise (GHE) behind its firewall. You would like to use your GHE as easily as you use GitHub, where you can use <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code> and <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code>.</p>
-<div class="figure">
-<img src="img/ghe_motivation.png">
-</div>
+<p><img src="img/ghe_motivation.png"></p>
 <p>One way to do this is to create a package, perhaps called <strong>acmetools</strong>. In this package you can create analogous functions that you could use to access your GHE, as demonstrated in the figure above. You can create these functions using <code><a href="../reference/use_github_enterprise.html">use_github_enterprise()</a></code>.</p>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -100,9 +107,9 @@
 <h3 class="hasAnchor">
 <a href="#create-a-package" class="anchor"></a>Create a package</h3>
 <p>If you don’t already have an institution-specific package, this is your invitation to create one.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You may want to call your package something different,</span>
-<span class="co"># as well as specify a different path on your computer.</span>
-usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/create_package">create_package</a></span>(<span class="st">"~/r-packages/acmetools"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># You may want to call your package something different,</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># as well as specify a different path on your computer.</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/create_package">create_package</a></span>(<span class="st">"~/r-packages/acmetools"</span>)</a></code></pre></div>
 <p>At this point, if you are using the RStudio IDE, a new RStudio project will open. Your subsequent work will be in this newly-created project.</p>
 </div>
 <div id="create-functions" class="section level3">
@@ -115,11 +122,11 @@ usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumenta
 <li><p>a longer <code>name</code> that will be put into your functions’ documentation, such as <code>"Acme Corporation"</code>.</p></li>
 </ul>
 <p>With this, you are ready to create your functions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_github_enterprise">use_github_enterprise</a></span>(
-  <span class="dt">host =</span> <span class="st">"github.acme-corp.com/api/v3"</span>,
-  <span class="dt">suffix =</span> <span class="st">"acme"</span>,
-  <span class="dt">name =</span> <span class="st">"Acme Corporation"</span>
-)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_github_enterprise">use_github_enterprise</a></span>(</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">host =</span> <span class="st">"github.acme-corp.com/api/v3"</span>,</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="dt">suffix =</span> <span class="st">"acme"</span>,</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="dt">name =</span> <span class="st">"Acme Corporation"</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">)</a></code></pre></div>
 <p>This will create three <code>R</code> files:</p>
 <ul>
 <li><p><code>utils-use_ghe.R</code>, containing <code>use_github_acme()</code></p></li>
@@ -142,8 +149,8 @@ usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumenta
   suppressMessages(require("acmetools"))
 }</code></pre>
 <p>To distribute the <strong>acmetools</strong> package, you can suggest that people use <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"&lt;your-account-here&gt;/acmetools"</span>, <span class="dt">host =</span> <span class="st">"github.acme-corp.com/api/v3"</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"&lt;your-account-here&gt;/acmetools"</span>, <span class="dt">host =</span> <span class="st">"github.acme-corp.com/api/v3"</span>)</a></code></pre></div>
 <p>Once they have <strong>acmetools</strong>, they can use <code><a href="http://www.rdocumentation.org/packages/acmetools/topics/install_github_acme">acmetools::install_github_acme()</a></code> instead.</p>
 <p>Alternatively, you could set up a CRAN-like repository using the <strong>drat</strong> package, then deploy it to be served from Acme’s GHE. Then, with a straightforward modification to your (or any of your Acme colleagues’) <code>.Rprofile</code>, you could use <code>install.packages("acmetools")</code>. This is the subject of this package’s <a href="using_repository.html">repository vignette</a>.</p>
 </div>
@@ -153,60 +160,59 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <a href="#behind-the-scenes" class="anchor"></a>Behind the scenes</h2>
 <p>The functions created by <code><a href="../reference/use_github_enterprise.html">use_github_enterprise()</a></code> are wrappers to (or mimic) existing <strong>usethis</strong> and <strong>devtools</strong> functions.</p>
 <p>Here is the code for <code><a href="http://www.rdocumentation.org/packages/acmetools/topics/install_github_acme">acmetools::install_github_acme()</a></code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">install_github_acme &lt;-<span class="st"> </span><span class="cf">function</span>(repo,
-                                <span class="dt">username =</span> <span class="ot">NULL</span>,
-                                <span class="dt">ref =</span> <span class="st">"master"</span>,
-                                <span class="dt">subdir =</span> <span class="ot">NULL</span>,
-                                <span class="dt">auth_token =</span> <span class="kw">github_acme_pat</span>(quiet),
-                                <span class="dt">host =</span> <span class="st">"github.acme-corp.com/api/v3"</span>,
-                                <span class="dt">quiet =</span> <span class="ot">FALSE</span>,
-                                ...){
-  devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(
-    repo,
-    <span class="dt">username =</span> username,
-    <span class="dt">ref =</span> ref,
-    <span class="dt">subdir =</span> subdir,
-    <span class="dt">auth_token =</span> auth_token,
-    <span class="dt">host =</span> host,
-    <span class="dt">quiet =</span> quiet,
-    ...
-  )
-}</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">install_github_acme &lt;-<span class="st"> </span><span class="cf">function</span>(repo,</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">                                <span class="dt">username =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                                <span class="dt">ref =</span> <span class="st">"master"</span>,</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">                                <span class="dt">subdir =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">                                <span class="dt">auth_token =</span> <span class="kw">github_acme_pat</span>(quiet),</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">                                <span class="dt">host =</span> <span class="st">"github.acme-corp.com/api/v3"</span>,</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">                                <span class="dt">quiet =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">                                ...){</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">  devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">    repo,</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">    <span class="dt">username =</span> username,</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">    <span class="dt">ref =</span> ref,</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">    <span class="dt">subdir =</span> subdir,</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">    <span class="dt">auth_token =</span> auth_token,</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">    <span class="dt">host =</span> host,</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">    <span class="dt">quiet =</span> quiet,</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">    ...</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">  )</a>
+<a class="sourceLine" id="cb6-19" data-line-number="19">}</a></code></pre></div>
 <p>As you can see, this function calls <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code> while changing argument-defaults to conform to Acme’s GHE.</p>
 <p>The same idea is used in <code>acmetools::use_github()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">use_github_acme &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">organisation =</span> <span class="ot">NULL</span>,
-                            <span class="dt">private =</span> <span class="ot">FALSE</span>,
-                            <span class="dt">protocol =</span> <span class="kw">c</span>(<span class="st">"ssh"</span>, <span class="st">"https"</span>),
-                            <span class="dt">credentials =</span> <span class="ot">NULL</span>,
-                            <span class="dt">auth_token =</span> <span class="kw">github_acme_pat</span>(),
-                            <span class="dt">host =</span> <span class="st">"https://github.acme-corp.com/api/v3"</span>) {
-
-  usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">use_github</a></span>(
-    <span class="dt">organisation =</span> organisation,
-    <span class="dt">private =</span> private,
-    <span class="dt">protocol =</span> protocol,
-    <span class="dt">credentials =</span> credentials,
-    <span class="dt">auth_token =</span> auth_token,
-    <span class="dt">host =</span> host
-  )
-}</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">use_github_acme &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">organisation =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">                            <span class="dt">private =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">                            <span class="dt">protocol =</span> <span class="kw">c</span>(<span class="st">"ssh"</span>, <span class="st">"https"</span>),</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">                            <span class="dt">credentials =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">                            <span class="dt">auth_token =</span> <span class="kw">github_acme_pat</span>(),</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">                            <span class="dt">host =</span> <span class="st">"https://github.acme-corp.com/api/v3"</span>) {</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">use_github</a></span>(</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="dt">organisation =</span> organisation,</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">    <span class="dt">private =</span> private,</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="dt">protocol =</span> protocol,</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">    <span class="dt">credentials =</span> credentials,</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">    <span class="dt">auth_token =</span> auth_token,</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">    <span class="dt">host =</span> host</a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">  )</a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">}</a></code></pre></div>
 <p>Finally, <code><a href="http://www.rdocumentation.org/packages/acmetools/topics/github_acme_pat">acmetools::github_acme_pat()</a></code> mimics <code><a href="http://www.rdocumentation.org/packages/devtools/topics/github_pat">devtools::github_pat()</a></code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">github_acme_pat &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">quiet =</span> <span class="ot">FALSE</span>) {
-
-  pat &lt;-<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">"GITHUB_ACME_PAT"</span>)
-  <span class="cf">if</span> (<span class="kw">nzchar</span>(pat)) {
-    <span class="cf">if</span> (<span class="op">!</span>quiet) {
-      <span class="kw">message</span>(<span class="st">"Using GitHub PAT from envvar GITHUB_ACME_PAT"</span>)
-    }
-    <span class="kw">return</span>(pat)
-  }
-}</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">github_acme_pat &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">quiet =</span> <span class="ot">FALSE</span>) {</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  pat &lt;-<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">"GITHUB_ACME_PAT"</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="cf">if</span> (<span class="kw">nzchar</span>(pat)) {</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">    <span class="cf">if</span> (<span class="op">!</span>quiet) {</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">      <span class="kw">message</span>(<span class="st">"Using GitHub PAT from envvar GITHUB_ACME_PAT"</span>)</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">    }</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">    <span class="kw">return</span>(pat)</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">  }</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">}</a></code></pre></div>
 </div>
 <div id="windows-7-and-ssh" class="section level2">
 <h2 class="hasAnchor">
 <a href="#windows-7-and-ssh" class="anchor"></a>Windows 7 and SSH</h2>
 <p>We found it difficult to use Windows 7 with SSH - this would be applicable to <code><a href="http://www.rdocumentation.org/packages/usethis/topics/use_github">usethis::use_github()</a></code> as well as <code><a href="http://www.rdocumentation.org/packages/acmetools/topics/use_github_acme">acmetools::use_github_acme()</a></code>. It is possible that this problem is confined to our particular corporate load of Windows. Anyhow, we wrote up our set of <a href="https://ijlyttle.github.io/ghentr/articles/workarounds.html#windows-7-and-ssh">workarounds</a>.</p>
-</div>
 </div>
   </div>
 
@@ -230,11 +236,13 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

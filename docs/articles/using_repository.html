@@ -8,14 +8,17 @@
 <title>Using a CRAN-like Repository • ghentr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Using a CRAN-like Repository">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -24,8 +27,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">ghentr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">ghentr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -56,7 +63,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -76,30 +83,30 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Using a CRAN-like Repository</h1>
                         <h4 class="author">Ian Lyttle</h4>
             
-            <h4 class="date">2018-02-24</h4>
-          </div>
+            <h4 class="date">2018-04-10</h4>
+      
+      <small>Source: <a href="https://github.com/ijlyttle/ghentr/blob/master/vignettes/using_repository.Rmd"><code>vignettes/using_repository.Rmd</code></a></small>
+
+    </div>
 
     
     
-<div class="contents">
 <p>The goal of this vignette is to show how to create and use a CRAN-like repository deployed to Github Enterprise (GHE). The idea is to use the Drat Repository Archive Template via the <a href="https://CRAN.R-project.org/package=drat">drat</a> package, by Dirk Eddelbuettel et al.</p>
 <p>Continuing the use-case of the <a href="using_ghe.html">GitHub Enterprise vignette</a>, let’s assume you work at <a href="https://en.wikipedia.org/wiki/Acme_Corporation">Acme Corporation</a> and that Acme has an instance of GitHub Enterprise (GHE) behind its firewall. You would like to create a CRAN-like repository so that you and your colleagues can install packages from a private repository just as easily as you install packages from CRAN.</p>
-<div class="figure">
-<img src="img/drat_motivation.png">
-</div>
+<p><img src="img/drat_motivation.png"></p>
 <p>Let’s assume that your CRAN-like repository is named ACMERAN. Once you have established your repository and populated it with packages, anyone within your firewall can <code>install.packages()</code> from the repository by adding a line to their <code>.Rprofile</code> file. As the administrator, you will need to determine your particular URL and publicize it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(
-  <span class="dt">repos =</span> <span class="kw">c</span>(
-    <span class="dt">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>,
-    <span class="dt">ACMERAN =</span> <span class="st">"https://pages.github.acme-corp.com/ACME-R/ACMERAN/"</span> <span class="co"># add a line like this</span>
-  ),
-  ...
-)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">options</span>(</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="dt">repos =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="dt">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>,</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="dt">ACMERAN =</span> <span class="st">"https://pages.github.acme-corp.com/ACME-R/ACMERAN/"</span> <span class="co"># add a line like this</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  ),</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  ...</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">)</a></code></pre></div>
 <p>The remainder of this vignette focuses on how to create and populate a CRAN-like repository like ACMERAN.</p>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -110,24 +117,24 @@
 <a href="#creating-a-repository" class="anchor"></a>Creating a repository</h3>
 <p>A CRAN-like repository is a filesystem made available via a URL, like <code>"https://cran.rstudio.com"</code>. If you are installing from source (as opposed to binaries), this filesystem need have only a directory named <code>src/contrib</code>.</p>
 <p>To start this process, create a new project on your computer:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/create_package">create_project</a></span>(<span class="st">"path/to/ACMERAN"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/create_package">create_project</a></span>(<span class="st">"path/to/ACMERAN"</span>)</a></code></pre></div>
 <p>If you are using the RStudio IDE, a new session will open for this project; continue your work there.</p>
 <p>Your next step is to create the filesystem. A convenience function is provided, <code><a href="../reference/init_drat_repo.html">init_drat_repo()</a></code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/init_drat_repo">init_drat_repo</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/init_drat_repo">init_drat_repo</a></span>()</a></code></pre></div>
 <p>You will be encouraged to set an option in your <code>.Rprofile</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(
-  <span class="dt">dratRepo =</span> <span class="st">"path/to/ACMERAN"</span>,
-  ...
-)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">options</span>(</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="dt">dratRepo =</span> <span class="st">"path/to/ACMERAN"</span>,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  ...</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">)</a></code></pre></div>
 <p>As the ACMERAN administrator, it is useful for you to set your <code>dratRepo</code> option; this makes it easier for you to add a package to your repository, as <strong>drat</strong> will know where to look.</p>
 <p>The goal of <strong>drat</strong> is to provide you a way to provide a source repository, as opposed to a binary repository. However, without the directory structure for the binaries, you will get warnings when you <code>install.packages()</code> from your repository.</p>
 <p>You can avoid these messages being generated by using the function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ghentr<span class="op">:::</span><span class="kw"><a href="../reference/make_drat_bin_placeholders.html">make_drat_bin_placeholders</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/make_drat_bin_placeholders">make_drat_bin_placeholders</a></span>()</a></code></pre></div>
 <p>You will be asked to confirm the creation of the directory structure and placeholder files.</p>
 <p>Next, you should create a git repository for your project. Here is where I suggest doing something differently from what <strong>drat</strong> suggests. If you were to use the <code><a href="http://www.rdocumentation.org/packages/drat/topics/initRepo">drat::initRepo()</a></code> function, it would create a git repository and a <code>gh-pages</code> branch. I suggest that you use the <code>master</code> branch because it will require you to act explicitly to share the git repository as a web-site; more on this later.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/use_git">use_git</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/use_git">use_git</a></span>()</a></code></pre></div>
 <p>To put this repository onto your (Acme’s) instance of GHE, you can use your <code><a href="http://www.rdocumentation.org/packages/acmetools/topics/use_github_acme">acmetools::use_github_acme()</a></code> function, as described in the <a href="using_ghe.html">using GitHub Enterprise vignette</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acmetools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/acmetools/topics/use_github_acme">use_github_acme</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">acmetools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/acmetools/topics/use_github_acme">use_github_acme</a></span>()</a></code></pre></div>
 <p>If you have problems with Windows and SSH-authentication for your git remotes, you may find this set of <a href="https://ijlyttle.github.io/ghentr/articles/workarounds.html#windows-7-and-ssh">workaround</a> useful.</p>
 <p>Finally, go to your repository’s page at your GHE website, go to its “Settings” tab, and activate “GitHub Pages” on the master branch.</p>
 <p>At this point, you have a fully-functioning CRAN-like repository. You can publicize the URL to your colleagues to add to their <code>options("repos")</code>. However, for the repository to be useful it needs packages.</p>
@@ -139,19 +146,19 @@
 <p>Start by opening the <strong>boomerang</strong> project in your RStudio IDE, ensuring your working directory is the project’s root directory.</p>
 <p>In a package’s <code>DESCRIPTION</code> file, there may a field called <code>Repository</code>. You may not have noticed it before now because it is added by the CRAN maintainers. This field is needed by <strong>packrat</strong> or <strong>rsconnect</strong>, so that they know where to find the source for a particular package. As the administrator for ACMERAN, this is your job to make sure this field is correct for all the packages added to ACMERAN.</p>
 <p>The <strong>ghentr</strong> package offers a couple of functions to set the <code>Repository</code> field in your new package’s <code>DESCRIPTION</code>. For ACMERAN, if <code>getOption("dratRepo")</code> is set, and its <code>basename()</code> is <code>"ACMERAN"</code> or <code>"acmeran"</code>, then you can use the <code><a href="../reference/use_drat_repo.html">use_drat_repo()</a></code> function. If not, you can use the <code><a href="../reference/use_drat_repo.html">use_repo()</a></code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">basename</span>(<span class="kw">getOption</span>(<span class="st">"dratRepo"</span>)) <span class="co"># check to see if "equivalent" to repository name</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">basename</span>(<span class="kw">getOption</span>(<span class="st">"dratRepo"</span>)) <span class="co"># check to see if "equivalent" to repository name</span></a></code></pre></div>
 <p>From the somewhere in the package directory for <strong>boomerang</strong>, you can run:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use one of these</span>
-
-<span class="co"># yes - name is equivalent</span>
-ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_drat_repo">use_drat_repo</a></span>()
-
-<span class="co"># no - name is not equivalent</span>
-ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_drat_repo">use_repo</a></span>(<span class="st">"ACMERAN"</span>)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># use one of these</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co"># yes - name is equivalent</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_drat_repo">use_drat_repo</a></span>()</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co"># no - name is not equivalent</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">ghentr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ghentr/topics/use_drat_repo">use_repo</a></span>(<span class="st">"ACMERAN"</span>)</a></code></pre></div>
 <p>This will add the field <code>"Repository: ACMERAN"</code> to <strong>boomerang</strong>’s DESCRIPTION file.</p>
 <p>Next, check and build the package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/check">check</a></span>() 
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/build">build</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/check">check</a></span>() </a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/build">build</a></span>()</a></code></pre></div>
 <p>If you get an error that looks like this:</p>
 <pre><code>'/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file --no-environ --no-save --no-restore  \
   --quiet CMD build '/Users/acmeuser/Documents/git/boomerang' --no-resave-data  \
@@ -167,7 +174,7 @@ Error: Command failed (1)</code></pre>
 <p>The <code>build()</code> function, if successful, returns a string describing the path to package file:</p>
 <pre><code>[1] "path/to/boomerang.tar.gz"</code></pre>
 <p>Now that you have this file, you can use <strong>drat</strong> to add it to your repository. The function <code><a href="http://www.rdocumentation.org/packages/drat/topics/insertPackage">drat::insertPackage()</a></code> uses <code>getOption("dratRepo")</code> as its default location for the drat repository.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drat<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/drat/topics/insertPackage">insertPackage</a></span>(<span class="st">"path/to/boomerang.tar.gz"</span>)</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">drat<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/drat/topics/insertPackage">insertPackage</a></span>(<span class="st">"path/to/boomerang.tar.gz"</span>)</a></code></pre></div>
 <p>When you commit and push your ACMERAN project to Acme’s GHE, the <strong>boomerang</strong> package will be available to anyone who has identified the ACMERAN repository, by using <code>install.packages("boomerang")</code>.</p>
 </div>
 <div id="source-repository" class="section level3">
@@ -180,22 +187,19 @@ Error: Command failed (1)</code></pre>
 <h3 class="hasAnchor">
 <a href="#using-repository-externally" class="anchor"></a>Using repository externally</h3>
 <p>Within your institution, you may want to install packages from your private repository, ACMERAN, on a virtual machine (or other such computer) outside your firewall. This section will walk you through how to do that from a technical point-of-view. Of course, you should check with your management to see if this solution is permissible as a matter of policy.</p>
-<div class="figure">
-<img src="img/drat_external_motivation.png">
-</div>
+<p><img src="img/drat_external_motivation.png"></p>
 <p>The first thing is to think of ACMERAN as being a <strong>git</strong> repository. From your computer’s point-of-view, within the firewall, you can have a remote that points to your instance of GHE. You can also have a remote that points to a private repository at <code>github.com</code>.</p>
 <p>From inside the firewall, you could pull the ACMERAN repository from your GHE, then push it to (private) <code>github.com</code>. This is the reason why I recommend that you serve GitHub pages from the <code>master</code> branch, rather than from the <code>gh-pages</code> branch. By using the <code>master</code> branch, <code>github.com</code> does not automatically make the repository available on GitHub pages. If you used a <code>gh-pages</code> branch, this would be served automatically, which may not be what you want to do with a set of private packages.</p>
 <p>From your resource outside the firewall, you could then pull the repository from <code>github.com</code> to a directory on that resource. Also on that resource, you could amend an <code>.Rprofile</code> file (or <code>.Rprofile.site</code>). Keep in mind that the URL that you provide for a package repository can be a <code>file://</code> URL on your remote resource.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(
-  <span class="dt">repos =</span> <span class="kw">c</span>(
-    <span class="dt">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>,
-    <span class="dt">ACMERAN =</span> <span class="st">"file://path/to/ACMERAN/"</span> 
-  ),
-  ...
-)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">options</span>(</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">  <span class="dt">repos =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">    <span class="dt">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>,</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">    <span class="dt">ACMERAN =</span> <span class="st">"file://path/to/ACMERAN/"</span> </a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">  ),</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">  ...</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">)</a></code></pre></div>
 <p>With this in place, you can <code>install.packages()</code> from ACMERAN on your remote resource.</p>
 <p>It occurs to me that this may be a use-case for Docker. However, I have to confess to not having used Docker - so I am in no position to recommend it (or not).</p>
-</div>
 </div>
 </div>
   </div>
@@ -218,11 +222,13 @@ Error: Command failed (1)</code></pre>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>
