@@ -26,7 +26,7 @@ LazyData: true
 URL: https://github.com/ijlyttle/ghentr
 BugReports: https://github.com/ijlyttle/ghentr/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: 
     covr,
     drat,

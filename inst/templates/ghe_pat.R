@@ -23,6 +23,8 @@ github_{{suffix}}_pat <- function(quiet = FALSE) {
     }
     return(pat)
   }
+
+  return(NULL)
 }
 
 

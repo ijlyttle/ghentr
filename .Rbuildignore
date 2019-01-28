@@ -7,5 +7,5 @@
 ^codecov\.yml$
 ^docs$
 ^_pkgdown\.yml$
-^vignettes/glitches\.Rmd$
+^vignettes/workarounds\.Rmd$
 ^presentation$
